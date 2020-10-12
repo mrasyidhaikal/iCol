@@ -17,9 +17,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
+        
+        // MARK: Change the names later
+        let viewController1 = ViewController1()
+        viewController1.tabBarItem = UITabBarItem(title: "VC1", image: UIImage(systemName: "rosette"), tag: 0)
+        let navController1 = UINavigationController(rootViewController: viewController1)
+        
+        let viewController2 = ViewController2()
+        viewController2.tabBarItem = UITabBarItem(title: "VC2", image: UIImage(systemName: "book"), tag: 1)
+        let navController2 = UINavigationController(rootViewController: viewController2)
+        
+        let viewController3 = ViewController3()
+        viewController3.tabBarItem = UITabBarItem(title: "VC3", image: UIImage(systemName: "person"), tag: 2)
+        let navController3 = UINavigationController(rootViewController: viewController3)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [navController1, navController2, navController3]
+        
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        window?.rootViewController = tabBarController
         window?.backgroundColor = .systemBackground
     }
 
