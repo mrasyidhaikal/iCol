@@ -19,20 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         // MARK: Change the names later
-        let viewController1 = ViewController1()
-        viewController1.tabBarItem = UITabBarItem(title: "VC1", image: UIImage(systemName: "rosette"), tag: 0)
-        let navController1 = UINavigationController(rootViewController: viewController1)
+        let habitViewController = HabitViewController()
+        habitViewController.tabBarItem = UITabBarItem(title: "Habit", image: UIImage(systemName: "rosette"), tag: 0)
+        let habitNavViewController = UINavigationController(rootViewController: habitViewController)
         
         let viewController2 = ViewController2()
         viewController2.tabBarItem = UITabBarItem(title: "VC2", image: UIImage(systemName: "book"), tag: 1)
         let navController2 = UINavigationController(rootViewController: viewController2)
         
-        let viewController3 = ViewController3()
-        viewController3.tabBarItem = UITabBarItem(title: "VC3", image: UIImage(systemName: "person"), tag: 2)
-        let navController3 = UINavigationController(rootViewController: viewController3)
-        
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [navController1, navController2, navController3]
+        tabBarController.viewControllers = [habitNavViewController, navController2]
         
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()

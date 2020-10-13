@@ -13,7 +13,7 @@
 		23D06A1D25345B8A00845C6F /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1C25345B8A00845C6F /* ViewController3.swift */; };
 		A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5536F25341FDD00219048 /* AppDelegate.swift */; };
 		A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537125341FDD00219048 /* SceneDelegate.swift */; };
-		A2A5537425341FDD00219048 /* ViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537325341FDD00219048 /* ViewController1.swift */; };
+		A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537325341FDD00219048 /* HabitViewController.swift */; };
 		A2A5537A25341FDD00219048 /* iCol.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537825341FDD00219048 /* iCol.xcdatamodeld */; };
 		A2A5537C25341FDE00219048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A5537B25341FDE00219048 /* Assets.xcassets */; };
 		A2A5537F25341FDE00219048 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A5537D25341FDE00219048 /* LaunchScreen.storyboard */; };
@@ -27,7 +27,7 @@
 		A2A5536C25341FDD00219048 /* iCol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5536F25341FDD00219048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5537125341FDD00219048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A2A5537325341FDD00219048 /* ViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController1.swift; sourceTree = "<group>"; };
+		A2A5537325341FDD00219048 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		A2A5537925341FDD00219048 /* iCol.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iCol.xcdatamodel; sourceTree = "<group>"; };
 		A2A5537B25341FDE00219048 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2A5537E25341FDE00219048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		23D06A2025345C1F00845C6F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A2A5537325341FDD00219048 /* ViewController1.swift */,
+				A2A5537325341FDD00219048 /* HabitViewController.swift */,
 				23D06A1925345B8300845C6F /* ViewController2.swift */,
 				23D06A1C25345B8A00845C6F /* ViewController3.swift */,
 			);
@@ -101,12 +101,12 @@
 			children = (
 				23D06A1725345B6900845C6F /* Base */,
 				23D06A2025345C1F00845C6F /* ViewControllers */,
-				A2A5537B25341FDE00219048 /* Assets.xcassets */,
 				2309AA0B25355AE800E1D0E2 /* ReusableCells */,
 				2309AA06253559F000E1D0E2 /* Extensions */,
 				A2A5537D25341FDE00219048 /* LaunchScreen.storyboard */,
 				A2A5538025341FDE00219048 /* Info.plist */,
 				A2A5537825341FDD00219048 /* iCol.xcdatamodeld */,
+				A2A5537B25341FDE00219048 /* Assets.xcassets */,
 			);
 			path = iCol;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 				2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */,
 				A2A5537A25341FDD00219048 /* iCol.xcdatamodeld in Sources */,
 				23D06A1D25345B8A00845C6F /* ViewController3.swift in Sources */,
-				A2A5537425341FDD00219048 /* ViewController1.swift in Sources */,
+				A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */,
 				A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */,
 				A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */,
 			);
