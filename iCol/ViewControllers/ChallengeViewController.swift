@@ -34,11 +34,16 @@ class ChallengeViewController: UITableViewController {
         tableView.separatorStyle = .none
     }
  
+}
+
+extension ChallengeViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return challenges.count
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
+        tableView.deselectRow(at: indexPath, animated: true)
         let vc = DescriptionViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -49,5 +54,5 @@ class ChallengeViewController: UITableViewController {
         
         return cell
     }
-
+    
 }

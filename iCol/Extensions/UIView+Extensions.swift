@@ -9,12 +9,12 @@ import UIKit
 
 extension UIView {
  
-    func setConstraint(topAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>?, topAnchorConstant: CGFloat = 0,
-                       bottomAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>?, bottomAnchorConstant: CGFloat = 0,
-                       leadingAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>?, leadingAnchorConstant: CGFloat = 0,
-                       trailingAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>?, trailingAnchorConstant: CGFloat = 0,
-                       centerXAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>?, centerXAnchorConstant: CGFloat = 0,
-                       centerYAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>?, centerYAnchorConstant: CGFloat = 0) {
+    func setConstraint(topAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>? = nil, topAnchorConstant: CGFloat = 0,
+                       bottomAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>? = nil, bottomAnchorConstant: CGFloat = 0,
+                       leadingAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>? = nil, leadingAnchorConstant: CGFloat = 0,
+                       trailingAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>? = nil, trailingAnchorConstant: CGFloat = 0,
+                       centerXAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>? = nil, centerXAnchorConstant: CGFloat = 0,
+                       centerYAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>? = nil, centerYAnchorConstant: CGFloat = 0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let topAnchor = topAnchor {

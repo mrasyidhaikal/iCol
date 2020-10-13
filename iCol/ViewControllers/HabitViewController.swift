@@ -34,6 +34,10 @@ class HabitViewController: UITableViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension HabitViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -44,5 +48,9 @@ class HabitViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
 

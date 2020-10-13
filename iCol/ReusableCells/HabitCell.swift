@@ -25,15 +25,11 @@ class HabitCell: UITableViewCell {
         containerView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 8,
                                     bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
                                     leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
-                                    trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0,
-                                    centerXAnchor: nil, centerXAnchorConstant: 0,
-                                    centerYAnchor: nil, centerYAnchorConstant: 0)
+                                    trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
         
         containerView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        
+        titleLabel.setConstraint(leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 16,
+                                 centerYAnchor: containerView.centerYAnchor)
     }
     
     required init?(coder: NSCoder) {
