@@ -19,7 +19,7 @@ class HabitViewController: UITableViewController {
 
     private func setupNavigation() {
         navigationItem.title = "Habit"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleHabitCreate))
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -27,6 +27,11 @@ class HabitViewController: UITableViewController {
         tableView.register(HabitCell.self, forCellReuseIdentifier: HabitCell.reuseIdentifier)
         tableView.rowHeight = 100
         tableView.separatorStyle = .none
+    }
+    
+    @objc private func handleHabitCreate() {
+        let vc = ChallengeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

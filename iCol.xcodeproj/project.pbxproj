@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */; };
 		2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA0825355AE400E1D0E2 /* HabitCell.swift */; };
-		23D06A1A25345B8300845C6F /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1925345B8300845C6F /* ViewController2.swift */; };
-		23D06A1D25345B8A00845C6F /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1C25345B8A00845C6F /* ViewController3.swift */; };
+		23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1925345B8300845C6F /* ChallengeViewController.swift */; };
+		23D06A1D25345B8A00845C6F /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1C25345B8A00845C6F /* ViewController2.swift */; };
+		26976DD4253566EE00B810BB /* ChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26976DD3253566EE00B810BB /* ChallengeCell.swift */; };
 		A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5536F25341FDD00219048 /* AppDelegate.swift */; };
 		A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537125341FDD00219048 /* SceneDelegate.swift */; };
 		A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537325341FDD00219048 /* HabitViewController.swift */; };
@@ -22,8 +23,9 @@
 /* Begin PBXFileReference section */
 		2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		2309AA0825355AE400E1D0E2 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
-		23D06A1925345B8300845C6F /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
-		23D06A1C25345B8A00845C6F /* ViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
+		23D06A1925345B8300845C6F /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		23D06A1C25345B8A00845C6F /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
+		26976DD3253566EE00B810BB /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
 		A2A5536C25341FDD00219048 /* iCol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5536F25341FDD00219048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5537125341FDD00219048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				2309AA0825355AE400E1D0E2 /* HabitCell.swift */,
+				26976DD3253566EE00B810BB /* ChallengeCell.swift */,
 			);
 			path = ReusableCells;
 			sourceTree = "<group>";
@@ -74,8 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				A2A5537325341FDD00219048 /* HabitViewController.swift */,
-				23D06A1925345B8300845C6F /* ViewController2.swift */,
-				23D06A1C25345B8A00845C6F /* ViewController3.swift */,
+				23D06A1925345B8300845C6F /* ChallengeViewController.swift */,
+				23D06A1C25345B8A00845C6F /* ViewController2.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -181,10 +184,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */,
-				23D06A1A25345B8300845C6F /* ViewController2.swift in Sources */,
+				23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */,
 				2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */,
 				A2A5537A25341FDD00219048 /* iCol.xcdatamodeld in Sources */,
-				23D06A1D25345B8A00845C6F /* ViewController3.swift in Sources */,
+				26976DD4253566EE00B810BB /* ChallengeCell.swift in Sources */,
+				23D06A1D25345B8A00845C6F /* ViewController2.swift in Sources */,
 				A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */,
 				A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */,
 				A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */,
