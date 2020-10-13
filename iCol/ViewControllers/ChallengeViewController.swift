@@ -33,14 +33,20 @@ class ChallengeViewController: UITableViewController {
         tableView.rowHeight = 100
         tableView.separatorStyle = .none
     }
-    
+ 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return challenges.count
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     
+        let vc = DescriptionViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChallengeCell.reuseIdentifier, for: indexPath) as! ChallengeCell
         cell.titleLabel.text = challenges[indexPath.row]
+        
         return cell
     }
 

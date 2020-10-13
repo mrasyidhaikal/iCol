@@ -1,8 +1,8 @@
 //
-//  ViewController3.swift
+//  ViewController2.swift
 //  iCol
 //
-//  Created by Windy on 12/10/20.
+//  Created by Muhammad Rasyid khaikal on 13/10/20.
 //
 
 import UIKit
