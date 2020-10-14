@@ -41,5 +41,12 @@ extension UIView {
             self.centerYAnchor.constraint(equalTo: centerYAnchor, constant: centerYAnchorConstant).isActive = true
         }
     }
+    
+    func addShadow(color: UIColor, opacity: Float, radius: CGFloat, offset: CGSize) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+        self.layer.shadowOffset = offset
+    }
 
 }
