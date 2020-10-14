@@ -7,20 +7,24 @@
 
 import UIKit
 
-class ChallengeViewController: UITableViewController {
+class ChallengeViewController: UICollectionViewController {
     
     private let challenges = [
-        "I want to eat less gorengan",
-        "I want to eat more vegetables",
-        "I want to drink less soda"
+        Challenge(name: "Eat Less Gorengan", image: "Fried"),
+        Challenge(name: "Eat More Vegetables", image: "Vegetable"),
+        Challenge(name: "Eat Less Fast Food", image: "Burger"),
+        Challenge(name: "Drink Less Soda", image: "Soda")
     ]
+    
+    init() {
+        super.init(collectionViewLayout: ChallengeViewController.createLayout())
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
+        setupCollection()
         setupNavigation()
-        setupTableView()
     }
 
     private func setupNavigation() {
@@ -28,31 +32,46 @@ class ChallengeViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    private func setupTableView() {
-        tableView.register(ChallengeCell.self, forCellReuseIdentifier: ChallengeCell.reuseIdentifier)
-        tableView.rowHeight = 100
-        tableView.separatorStyle = .none
-    }
- 
-}
-
-extension ChallengeViewController {
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return challenges.count
+    private func setupCollection() {
+        collectionView.backgroundColor = UIColor(red: 0xF7, green: 0xF7, blue: 0xF7, alpha: 1)
+        collectionView.register(ChallengeCell.self, forCellWithReuseIdentifier: ChallengeCell.reuseIdentifier)
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    private static func createLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (sectionNumber, environment) ->
+            NSCollectionLayoutSection? in
+          
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.55)))
+            item.contentInsets.bottom = 12
+            item.contentInsets.trailing = 16
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)), subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets.leading = 16
+            section.contentInsets.top = 20
+            
+            return section
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DescriptionViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChallengeCell.reuseIdentifier, for: indexPath) as! ChallengeCell
-        cell.titleLabel.text = challenges[indexPath.row]
-        
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChallengeCell.reuseIdentifier, for: indexPath) as? ChallengeCell else { return UICollectionViewCell() }
+        let challenge = challenges[indexPath.row]
+        cell.challengeLabel.text = challenge.name
+        cell.challengeImageView.image = UIImage(named: challenge.image)
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return challenges.count
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+ 
 }
