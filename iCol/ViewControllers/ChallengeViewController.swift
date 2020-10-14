@@ -33,7 +33,7 @@ class ChallengeViewController: UICollectionViewController {
     }
     
     private func setupCollection() {
-        collectionView.backgroundColor = UIColor(red: 0xF7, green: 0xF7, blue: 0xF7, alpha: 1)
+        collectionView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
         collectionView.register(ChallengeCell.self, forCellWithReuseIdentifier: ChallengeCell.reuseIdentifier)
     }
     
