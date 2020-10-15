@@ -10,6 +10,7 @@ import UIKit
 class HabitDetailViewController: UIViewController {
     
     let challengeOverview = ChallengeOverview()
+    let challengeProgressView = ChallengeProgressView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,19 +26,42 @@ class HabitDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        
         view.addSubview(challengeOverview)
+        view.addSubview(challengeProgressView)
         
         challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
                                         leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                         trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        challengeProgressView.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 32,
+                                            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+                                            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
     }
     
 }
 
 class ChallengeProgressView: UIView {
     
+    let dateLabel = UILabel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Update Progress"
+        titleLabel.font = .preferredFont(forTextStyle: .body)
+        addSubview(titleLabel)
+        
+        dateLabel.text = "Wednesday, 14 October 2020"
+        dateLabel.font = .preferredFont(forTextStyle: .headline)
+        addSubview(dateLabel)
+        
+        titleLabel.setConstraint(topAnchor: topAnchor, topAnchorConstant: 0,
+                                 leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                                 trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
+        dateLabel.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 16,
+                                leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                                trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
     }
     
     required init?(coder: NSCoder) {
@@ -71,7 +95,7 @@ class ChallengeOverview: UIView {
         percentageStackView.distribution = .equalCentering
         addSubview(percentageStackView)
 
-        progressBar.percentage = 0.5
+        progressBar.percentage = 0.2
         addSubview(progressBar)
 
         let doneSymbol = UIView()
@@ -124,10 +148,10 @@ class ChallengeOverview: UIView {
                                   leadingAnchor: leadingAnchor,
                                   trailingAnchor: trailingAnchor)
 
-        textStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 40,
+        textStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
                                     trailingAnchor: trailingAnchor)
 
-        doneStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 40,
+        doneStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
                                     trailingAnchor: textStackView.leadingAnchor, trailingAnchorConstant: -24)
 
         doneSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
@@ -141,6 +165,7 @@ class ChallengeOverview: UIView {
                                        trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
 
         totalEat.setConstraint(topAnchor: totalYouEatLabel.bottomAnchor, topAnchorConstant: 8,
+                               bottomAnchor: bottomAnchor,
                                leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
                                trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
     }
@@ -174,12 +199,14 @@ class ProgressBarView: UIView {
         progressBackground.layer.cornerRadius = 8
 
         progressBackground.setConstraint(topAnchor: topAnchor, topAnchorConstant: 0,
+                                         bottomAnchor: bottomAnchor,
                                          leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
                                          trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
         progressBackground.heightAnchor.constraint(equalToConstant: 30).isActive = true
         progressBackground.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
         progressView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 0,
+                                   bottomAnchor: bottomAnchor,
                                    leadingAnchor: leadingAnchor, leadingAnchorConstant: 0)
         progressView.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
