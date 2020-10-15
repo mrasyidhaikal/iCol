@@ -15,6 +15,7 @@ class DescriptionViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigation()
+        setupBackground()
         setupDescription()
         setupButton()
     }
@@ -22,6 +23,10 @@ class DescriptionViewController: UIViewController {
     private func setupNavigation() {
         navigationItem.title = "Eat Less Gorengan"
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func setupBackground() {
+        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
     }
     
     private func setupDescription() {
@@ -37,9 +42,10 @@ class DescriptionViewController: UIViewController {
     
     private func setupButton() {
         let takeBtn = UIButton(type: .system)
-        takeBtn.backgroundColor = UIColor.black
+        takeBtn.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.3882352941, blue: 0.337254902, alpha: 1)
         takeBtn.setTitleColor(UIColor.white, for: .normal)
-        takeBtn.setTitle("Take Me", for: .normal)
+        takeBtn.setTitle("Take The Challenge", for: .normal)
+        takeBtn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         takeBtn.layer.cornerRadius = 8
         view.addSubview(takeBtn)
         
