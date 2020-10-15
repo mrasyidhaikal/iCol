@@ -33,7 +33,7 @@ class HabitDetailViewController: UIViewController {
         challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
                                         leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                         trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        challengeProgressView.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 32,
+        challengeProgressView.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 56,
                                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
                                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
     }
@@ -43,6 +43,12 @@ class HabitDetailViewController: UIViewController {
 class ChallengeProgressView: UIView {
     
     let dateLabel = UILabel()
+    let collectionView: UICollectionView = {
+        let flow = UICollectionViewFlowLayout()
+        flow.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flow)
+        return cv
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,12 +68,82 @@ class ChallengeProgressView: UIView {
         dateLabel.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 16,
                                 leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
                                 trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
+        
+        setupCollectionView()
+    }
+    
+    private func setupCollectionView() {
+        addSubview(collectionView)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.setConstraint(topAnchor: dateLabel.bottomAnchor, topAnchorConstant: 16,
+                                     bottomAnchor: bottomAnchor,
+                                     leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                                     trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
+        collectionView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        
+        collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension ChallengeProgressView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 44.8, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.reuseIdentifier, for: indexPath) as! DayCell
+        
+        return cell
+    }
+    
+}
+
+class DayCell: UICollectionViewCell {
+    
+    static let reuseIdentifier = "DayCell"
+    
+    let dateLabel = UILabel()
+    let monthLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = #colorLiteral(red: 0.8850145936, green: 0.9960160851, blue: 0.9677742124, alpha: 1)
+        layer.cornerRadius = 8
+        
+        dateLabel.font = .preferredFont(forTextStyle: .body)
+        dateLabel.font = .boldSystemFont(ofSize: 17)
+        dateLabel.text = "23"
+        monthLabel.font = .preferredFont(forTextStyle: .footnote)
+        monthLabel.text = "Oct"
+        
+        let stackView = UIStackView(arrangedSubviews: [dateLabel, monthLabel])
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        addSubview(stackView)
+        
+        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 class ChallengeOverview: UIView {
