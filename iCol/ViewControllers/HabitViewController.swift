@@ -51,6 +51,8 @@ extension HabitViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let vc = UINavigationController(rootViewController: HabitDetailViewController())
+        present(vc, animated: true)
     }
     
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */; };
 		2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA0825355AE400E1D0E2 /* HabitCell.swift */; };
+		235A316D2536E558000BD305 /* HabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A316C2536E558000BD305 /* HabitDetailViewController.swift */; };
 		23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1925345B8300845C6F /* ChallengeViewController.swift */; };
 		23D06A1D25345B8A00845C6F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */; };
 		263F37B72536AFC3009D7608 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F37B62536AFC3009D7608 /* Challenge.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		2309AA0825355AE400E1D0E2 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
+		235A316C2536E558000BD305 /* HabitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewController.swift; sourceTree = "<group>"; };
 		23D06A1925345B8300845C6F /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
 		23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		263F37B62536AFC3009D7608 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				23D06A1925345B8300845C6F /* ChallengeViewController.swift */,
 				23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */,
 				A23CFF762536AA7400D2602D /* PlanningViewController.swift */,
+				235A316C2536E558000BD305 /* HabitDetailViewController.swift */,
 				A2A553C325358B4E00219048 /* ViewController2.swift */,
 			);
 			path = ViewControllers;
@@ -211,6 +214,7 @@
 				A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */,
 				A23CFF772536AA7400D2602D /* PlanningViewController.swift in Sources */,
 				A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */,
+				235A316D2536E558000BD305 /* HabitDetailViewController.swift in Sources */,
 				A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
