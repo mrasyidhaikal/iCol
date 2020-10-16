@@ -25,8 +25,9 @@ class HabitViewController: UITableViewController {
     
     private func setupTableView() {
         tableView.register(HabitCell.self, forCellReuseIdentifier: HabitCell.reuseIdentifier)
-        tableView.rowHeight = 100
-        tableView.separatorStyle = .none
+        tableView.rowHeight = 130
+        tableView.separatorStyle = .none        
+        tableView.backgroundView = UIImageView(image: UIImage(named: "bgVector"))
     }
     
     @objc private func handleHabitCreate() {
@@ -44,7 +45,7 @@ extension HabitViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitCell.reuseIdentifier, for: indexPath) as! HabitCell
-        cell.titleLabel.text = "Test"
+        cell.backgroundColor = .clear
         return cell
     }
 

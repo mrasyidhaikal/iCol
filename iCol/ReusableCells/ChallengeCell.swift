@@ -7,32 +7,57 @@
 
 import UIKit
 
-class ChallengeCell: UITableViewCell {
+class ChallengeCell: UICollectionViewCell {
 
     static let reuseIdentifier = "ChallengeCell"
     
     let containerView = UIView()
-    let titleLabel = UILabel()
+    let challengeLabel = UILabel()
+    let challengeImageView = UIImageView()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         
-        containerView.backgroundColor = .systemRed
+        // TODO: - Initialize View
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = false
-        addSubview(containerView)
-
-        containerView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 8,
-                                    bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
-                                    leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
-                                    trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
+        containerView.backgroundColor = .white
+        containerView.addShadow(color: .black, opacity: 0.1, radius: 10, offset: CGSize(width: 0, height: 4))
         
-        containerView.addSubview(titleLabel)
-        titleLabel.setConstraint(leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 16,
-                                 centerYAnchor: containerView.centerYAnchor)
+        challengeImageView.frame = CGRect(x: 0, y: 0, width: containerView.bounds.width / 2, height: 10)
+        challengeImageView.contentMode = .scaleAspectFit
+        
+        challengeLabel.textAlignment = .center
+        challengeLabel.numberOfLines = 0
+        challengeLabel.font = .preferredFont(forTextStyle: .title3)
+        
+        // TODO: - Adding Subview
+        addSubview(containerView)
+        containerView.addSubview(challengeImageView)
+        containerView.addSubview(challengeLabel)
+        
+        // TODO: - Setting Auto Layout
+        containerView.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 8,
+            bottomAnchor: bottomAnchor, bottomAnchorConstant: 0,
+            leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0
+        )
 
+        challengeImageView.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 20,
+            centerXAnchor: containerView.centerXAnchor
+        )
+        challengeImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        challengeImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+
+        challengeLabel.setConstraint(
+            bottomAnchor: containerView.bottomAnchor, bottomAnchorConstant: -20,
+            leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 14,
+            centerXAnchor: containerView.centerXAnchor
+        )
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

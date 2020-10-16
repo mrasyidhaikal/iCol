@@ -11,7 +11,9 @@
 		2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA0825355AE400E1D0E2 /* HabitCell.swift */; };
 		23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1925345B8300845C6F /* ChallengeViewController.swift */; };
 		23D06A1D25345B8A00845C6F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */; };
+		263F37B72536AFC3009D7608 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F37B62536AFC3009D7608 /* Challenge.swift */; };
 		26976DD4253566EE00B810BB /* ChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26976DD3253566EE00B810BB /* ChallengeCell.swift */; };
+		A23CFF772536AA7400D2602D /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23CFF762536AA7400D2602D /* PlanningViewController.swift */; };
 		A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5536F25341FDD00219048 /* AppDelegate.swift */; };
 		A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537125341FDD00219048 /* SceneDelegate.swift */; };
 		A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5537325341FDD00219048 /* HabitViewController.swift */; };
@@ -26,7 +28,9 @@
 		2309AA0825355AE400E1D0E2 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
 		23D06A1925345B8300845C6F /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
 		23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		263F37B62536AFC3009D7608 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		26976DD3253566EE00B810BB /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
+		A23CFF762536AA7400D2602D /* PlanningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningViewController.swift; sourceTree = "<group>"; };
 		A2A5536C25341FDD00219048 /* iCol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5536F25341FDD00219048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5537125341FDD00219048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,9 +85,18 @@
 				A2A5537325341FDD00219048 /* HabitViewController.swift */,
 				23D06A1925345B8300845C6F /* ChallengeViewController.swift */,
 				23D06A1C25345B8A00845C6F /* DescriptionViewController.swift */,
+				A23CFF762536AA7400D2602D /* PlanningViewController.swift */,
 				A2A553C325358B4E00219048 /* ViewController2.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		263F37B52536AFB1009D7608 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				263F37B62536AFC3009D7608 /* Challenge.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A2A5536325341FDD00219048 = {
@@ -105,6 +118,7 @@
 		A2A5536E25341FDD00219048 /* iCol */ = {
 			isa = PBXGroup;
 			children = (
+				263F37B52536AFB1009D7608 /* Models */,
 				23D06A1725345B6900845C6F /* Base */,
 				23D06A2025345C1F00845C6F /* ViewControllers */,
 				2309AA0B25355AE800E1D0E2 /* ReusableCells */,
@@ -190,10 +204,12 @@
 				23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */,
 				2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */,
 				A2A5537A25341FDD00219048 /* iCol.xcdatamodeld in Sources */,
+				263F37B72536AFC3009D7608 /* Challenge.swift in Sources */,
 				26976DD4253566EE00B810BB /* ChallengeCell.swift in Sources */,
 				A2A553C425358B4E00219048 /* ViewController2.swift in Sources */,
 				23D06A1D25345B8A00845C6F /* DescriptionViewController.swift in Sources */,
 				A2A5537425341FDD00219048 /* HabitViewController.swift in Sources */,
+				A23CFF772536AA7400D2602D /* PlanningViewController.swift in Sources */,
 				A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */,
 				A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */,
 			);
