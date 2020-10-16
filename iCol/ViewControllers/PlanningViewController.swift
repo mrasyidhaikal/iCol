@@ -25,10 +25,8 @@ class PlanningViewController: UIViewController {
     let endText = UILabel()
     let txtPeices = UITextField()
     
-    
     lazy var txtDatePicker:UITextField = {
         let txt = UITextField()
-        
         txt.leftView = UIImageView(image: UIImage(systemName: "calendar"))
         txt.leftViewMode = .always
         txt.font = UIFont.preferredFont(forTextStyle: .body)
@@ -48,11 +46,9 @@ class PlanningViewController: UIViewController {
         datePick.addTarget(self, action: #selector(self.valuechangedDateStart), for: .valueChanged)
         return txt
     }()
+    
     lazy var txtDatePicker2:UITextField = {
         let txt = UITextField()
-        
-        
-        
         txt.font = UIFont.preferredFont(forTextStyle: .body)
         txt.leftView = UIImageView(image: UIImage(systemName: "calendar"))
         txt.leftViewMode = .always
@@ -62,6 +58,7 @@ class PlanningViewController: UIViewController {
         
         let datePick = UIDatePicker()
         datePick.datePickerMode = .date
+        
         if #available(iOS 13.4, *) {
             datePick.preferredDatePickerStyle = .wheels
         } else {
@@ -73,7 +70,6 @@ class PlanningViewController: UIViewController {
         return txt
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
@@ -92,8 +88,8 @@ class PlanningViewController: UIViewController {
         navigationItem.title = "Let’s set a plan!"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     private func setupConsumtion() {
-        
         txtPeices.keyboardType = .numberPad
         txtPeices.font = UIFont.preferredFont(forTextStyle: .body)
         txtPeices.borderStyle = .none
@@ -120,13 +116,13 @@ class PlanningViewController: UIViewController {
         stackConsumtion.spacing = 10
         stackConsumtion.alignment = .fill
         view.addSubview(stackConsumtion)
-        stackConsumtion.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 50, leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor )
+        stackConsumtion.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 50,
+                                      leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+                                      trailingAnchor: view.layoutMarginsGuide.trailingAnchor )
         
     }
     
     private func setupSlider() {
-        
         
         goalText.text = "Set your Goal"
         goalText.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -135,22 +131,18 @@ class PlanningViewController: UIViewController {
         reduce.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         slide.minimumValue = 0
-        
         slide.isContinuous = true
         slide.tintColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         slide.thumbTintColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         slide.addTarget(self, action: #selector(sliderValue(_:)), for: .valueChanged)
         
         goalValue.font = UIFont.preferredFont(forTextStyle: .title3)
-        
         goalValue.layer.borderColor = UIColor.green.cgColor
         goalValue.layer.backgroundColor = UIColor.white.cgColor
         goalValue.layer.borderWidth = 0.0
         goalValue.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         goalValue.layer.shadowOpacity = 1.0
         goalValue.layer.shadowRadius = 0.0
-        
-        
         
         stackSlider.addArrangedSubview(goalText)
         stackSlider.addArrangedSubview(slide)
@@ -177,7 +169,7 @@ class PlanningViewController: UIViewController {
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
-    private func setupDate(){
+    private func setupDate() {
         startText.text = "Start"
         startText.font = UIFont.preferredFont(forTextStyle: .title3)
         endText.text = "End"
@@ -194,40 +186,39 @@ class PlanningViewController: UIViewController {
                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -100)
         
-        
-        
         stack4.addArrangedSubview(txtDatePicker)
         stack4.addArrangedSubview(txtDatePicker2)
         stack4.axis = .horizontal
         stack4.spacing = 70
         stack4.distribution = .fillEqually
         view.addSubview(stack4)
-        stack4.setConstraint(topAnchor: stackStartEnd.bottomAnchor, topAnchorConstant: 30,bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor , bottomAnchorConstant: -50,
-                                 leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+        stack4.setConstraint(topAnchor: stackStartEnd.bottomAnchor, topAnchorConstant: 30,
+                             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor , bottomAnchorConstant: -50,
+                                leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
-
-// Date
+    // MARK: Date
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    @objc func valuechangedDateStart(sender: UIDatePicker){
+    
+    @objc func valuechangedDateStart(sender: UIDatePicker) {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .long
         dateFormat.dateFormat = "E dd MMM"
         self.txtDatePicker.text = dateFormat.string(from: sender.date)
     }
-    @objc func valuechangedDateEnd(sender: UIDatePicker){
+    
+    @objc func valuechangedDateEnd(sender: UIDatePicker) {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .long
         dateFormat.dateFormat = "E dd MMM"
         self.txtDatePicker2.text = dateFormat.string(from: sender.date)
     }
     
-// Slide
-    
-    @objc func sliderValue(_ sender:UISlider){
+    // MARK: Slider
+    @objc func sliderValue(_ sender:UISlider) {
         goalValue.text = "\(String(Int(sender.value))) Pieces"
     }
     
