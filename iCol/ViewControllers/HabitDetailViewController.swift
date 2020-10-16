@@ -45,7 +45,8 @@ class HabitDetailViewController: UIViewController {
         view.addSubview(updateLabel)
         
         totalEatPerDayLabel.text = "\(totalEatPerDay)"
-        totalEatPerDayLabel.font = .preferredFont(forTextStyle: .title1)
+        totalEatPerDayLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        totalEatPerDayLabel.font = .boldSystemFont(ofSize: 32)
         
         let stepper = UIStepper()
         stepper.minimumValue = 0
@@ -61,20 +62,21 @@ class HabitDetailViewController: UIViewController {
         divider.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
         view.addSubview(divider)
         
-        updateLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
-                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0)
-        
-        stackView.setConstraint(topAnchor: updateLabel.bottomAnchor, topAnchorConstant: 64,
-                                centerXAnchor: view.centerXAnchor)
-        
-        divider.setConstraint(topAnchor: stackView.bottomAnchor, topAnchorConstant: 64,
-                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
-                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
-        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        challengeOverview.setConstraint(topAnchor: divider.bottomAnchor, topAnchorConstant: 64,
+        challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
                                         leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                         trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        
+//        divider.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 64,
+//                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+//                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0,
+//                              heighAnchorConstant: 1)
+        
+        updateLabel.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 64,
+                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0)
+
+        stackView.setConstraint(topAnchor: updateLabel.bottomAnchor, topAnchorConstant: 64,
+                                centerXAnchor: view.centerXAnchor)
+
     }
     
     @objc private func stepperValueChanged(_ sender: UIStepper) {
@@ -101,8 +103,8 @@ class HabitOverview: UIView {
         addSubview(titleLabel)
 
         percentageLabel.text = "40%"
-        percentageLabel.font = .preferredFont(forTextStyle: .title2)
-        percentageLabel.font = .boldSystemFont(ofSize: 24)
+        percentageLabel.font = .preferredFont(forTextStyle: .body)
+//        percentageLabel.font = .boldSystemFont(ofSize: 24)
 
         remainingDay.text = "4 days till challenge ends"
         remainingDay.font = .preferredFont(forTextStyle: .body)

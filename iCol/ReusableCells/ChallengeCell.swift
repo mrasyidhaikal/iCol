@@ -44,12 +44,9 @@ class ChallengeCell: UICollectionViewCell {
             trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0
         )
 
-        challengeImageView.setConstraint(
-            topAnchor: topAnchor, topAnchorConstant: 20,
-            centerXAnchor: containerView.centerXAnchor
-        )
-        challengeImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        challengeImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        challengeImageView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 32,
+                                         centerXAnchor: containerView.centerXAnchor, centerXAnchorConstant: 0,
+                                         heighAnchorConstant: 80, widthAnchorConstant: 80)
 
         challengeLabel.setConstraint(
             bottomAnchor: containerView.bottomAnchor, bottomAnchorConstant: -20,

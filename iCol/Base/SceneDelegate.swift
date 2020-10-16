@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = tabBarController
+        window?.rootViewController = UINavigationController(rootViewController: HabitViewController())
         window?.backgroundColor = .systemBackground
         window?.tintColor = Color.primary
     }

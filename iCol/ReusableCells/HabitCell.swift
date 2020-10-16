@@ -37,32 +37,33 @@ class HabitCell: UITableViewCell {
         descImageLabel.image = UIImage(systemName: "flame")
         descImageLabel.tintColor = .label
         descLabel.text = "9 gorengan eaten"
-        descLabel.font = .preferredFont(forTextStyle: .footnote)
+        descLabel.font = .preferredFont(forTextStyle: .body)
         
         let descLabelStackView = UIStackView(arrangedSubviews: [descImageLabel, descLabel])
         descLabelStackView.axis = .horizontal
         descLabelStackView.spacing = 4
+        addSubview(descLabelStackView)
         
-        timeImageLabel.image = UIImage(systemName: "alarm")
-        timeImageLabel.tintColor = .label
-        timeLabel.text = "02:00 PM"
-        timeLabel.font = .preferredFont(forTextStyle: .footnote)
+//        timeImageLabel.image = UIImage(systemName: "alarm")
+//        timeImageLabel.tintColor = .label
+//        timeLabel.text = "02:00 PM"
+//        timeLabel.font = .preferredFont(forTextStyle: .footnote)
+//
+//        let timeStackView = UIStackView(arrangedSubviews: [timeImageLabel, timeLabel])
+//        timeStackView.axis = .horizontal
+//        timeStackView.spacing = 4
         
-        let timeStackView = UIStackView(arrangedSubviews: [timeImageLabel, timeLabel])
-        timeStackView.axis = .horizontal
-        timeStackView.spacing = 4
-        
-        let descStackView = UIStackView(arrangedSubviews: [descLabelStackView, timeStackView])
-        descStackView.axis = .horizontal
-        descStackView.distribution = .equalCentering
-        containerView.addSubview(descStackView)
+//        let descStackView = UIStackView(arrangedSubviews: [descLabelStackView, timeStackView])
+//        descStackView.axis = .horizontal
+//        descStackView.distribution = .equalCentering
+//        containerView.addSubview(descStackView)
         
         percentageLabel.text = "40%"
-        percentageLabel.font = .preferredFont(forTextStyle: .footnote)
+        percentageLabel.font = .preferredFont(forTextStyle: .body)
         containerView.addSubview(percentageLabel)
         
         progressBar.progress = 0.5
-        progressBar.progressTintColor = #colorLiteral(red: 0.4615316987, green: 0.7156453133, blue: 0.7555921674, alpha: 1)
+        progressBar.progressTintColor = Color.primary
         containerView.addSubview(progressBar)
         
         containerView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 8,
@@ -70,21 +71,24 @@ class HabitCell: UITableViewCell {
                                     leadingAnchor: layoutMarginsGuide.leadingAnchor,
                                     trailingAnchor: layoutMarginsGuide.trailingAnchor)
         
-        titleLabel.setConstraint(topAnchor: containerView.topAnchor, topAnchorConstant: 8,
+        titleLabel.setConstraint(topAnchor: containerView.topAnchor, topAnchorConstant: 16,
                                  leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
         
-        descStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
-                                    leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
-                                    trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
+        descLabelStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
+                                         leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
         
-        percentageLabel.setConstraint(topAnchor: descStackView.bottomAnchor, topAnchorConstant: 8,
+//        descStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
+//                                    leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
+//                                    trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
+        
+        percentageLabel.setConstraint(topAnchor: descLabelStackView.bottomAnchor, topAnchorConstant: 0,
                                       trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
-        
-        progressBar.setConstraint(topAnchor: percentageLabel.bottomAnchor, topAnchorConstant: 4,
+
+        progressBar.setConstraint(topAnchor: percentageLabel.bottomAnchor, topAnchorConstant: 8,
                                   bottomAnchor: containerView.bottomAnchor, bottomAnchorConstant: -16,
                                   leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
-                                  trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
-        progressBar.heightAnchor.constraint(equalToConstant: 6).isActive = true
+                                  trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24,
+                                  heighAnchorConstant: 6)
     }
     
     required init?(coder: NSCoder) {

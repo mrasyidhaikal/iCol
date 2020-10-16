@@ -42,8 +42,8 @@ class ChallengeViewController: UICollectionViewController {
             NSCollectionLayoutSection? in
           
             let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.55)))
-            item.contentInsets.bottom = 12
-            item.contentInsets.trailing = 16
+            item.contentInsets.bottom = 16
+            item.contentInsets.trailing = 8
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)), subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets.leading = 16
@@ -55,6 +55,8 @@ class ChallengeViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DescriptionViewController()
+        vc.navigationItem.title = challenges[indexPath.row].name
+        print(challenges[indexPath.row].name)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

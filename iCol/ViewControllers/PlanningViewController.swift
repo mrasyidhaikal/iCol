@@ -9,31 +9,27 @@ import UIKit
 
 class PlanningViewController: UIViewController {
     
-    let slide = UISlider()
-    let perDayUssaly = UILabel()
-    let perDayMuch = UILabel()
-    let goalText = UILabel()
-    let goalValue = UILabel()
-    let reduce = UILabel()
+    let goalSlider = UISlider()
+    let goalLabel = UILabel()
+    let reducePerWeekLabel = UILabel()
     let valueUssaly = UILabel()
     let valueMuch = UILabel()
-    let stackConsumtion = UIStackView()
-    let stackStartEnd = UIStackView()
-    let stackSlider = UIStackView()
-    let stack4 = UIStackView()
-    let startText = UILabel()
-    let endText = UILabel()
-    let txtPeices = UITextField()
+    private var consumptionStackView: UIStackView! = nil
+    private var startEndStackView: UIStackView! = nil
+    private var sliderStackView: UIStackView! = nil
+    private var dateStackView: UIStackView! = nil
+    
+    let startEndTextField = UITextField()
+    let currentConsumptionTextfield = UITextField()
     
     lazy var txtDatePicker:UITextField = {
         let txt = UITextField()
-        txt.leftView = UIImageView(image: UIImage(systemName: "calendar"))
-        txt.leftViewMode = .always
+        txt.rightView = UIImageView(image: UIImage(systemName: "calendar"))
+        txt.rightViewMode = .always
         txt.font = UIFont.preferredFont(forTextStyle: .body)
-        txt.borderStyle = .roundedRect
-        txt.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        txt.tintColor = .black
-        
+        txt.borderStyle = .none
+        txt.placeholder = "Enter your date"
+
         let datePick = UIDatePicker()
         datePick.datePickerMode = .date
         if #available(iOS 13.4, *) {
@@ -76,8 +72,8 @@ class PlanningViewController: UIViewController {
         setupNavigation()
         setupConsumtion()
         setupSlider()
-        setupDate()
-        setupDateText()
+//        setupDate()
+        setupTextfield()
     }
     
     private func setupBackground() {
@@ -90,112 +86,124 @@ class PlanningViewController: UIViewController {
     }
     
     private func setupConsumtion() {
-        txtPeices.keyboardType = .numberPad
-        txtPeices.font = UIFont.preferredFont(forTextStyle: .body)
-        txtPeices.borderStyle = .none
-        txtPeices.layer.borderColor = UIColor.green.cgColor
-        txtPeices.layer.backgroundColor = UIColor.white.cgColor
-        txtPeices.layer.borderWidth = 0.0
-        txtPeices.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        txtPeices.layer.shadowOpacity = 1.0
-        txtPeices.layer.shadowRadius = 0.0
-        txtPeices.addTarget(self, action: #selector(perWeekValue), for: .editingChanged)
+    
+        currentConsumptionTextfield.keyboardType = .numberPad
+        currentConsumptionTextfield.borderStyle = .none
+        currentConsumptionTextfield.addTarget(self, action: #selector(perWeekValue), for: .editingChanged)
+        currentConsumptionTextfield.placeholder = "Enter your consumption"
         
+        let line = UIView()
+        line.backgroundColor = .label
+        line.setConstraint(heighAnchorConstant: 2)
+        
+        let perDayUssaly = UILabel()
         perDayUssaly.text = "Your current consumption (per day)"
         perDayUssaly.font = UIFont.preferredFont(forTextStyle: .title3)
         
         valueUssaly.font = UIFont.preferredFont(forTextStyle: .subheadline)
         valueUssaly.text = "Estimated : 0 piece(s) / week"
         
-        stackConsumtion.addArrangedSubview(perDayUssaly)
-        txtPeices.translatesAutoresizingMaskIntoConstraints = false
-        txtPeices.heightAnchor.constraint(equalToConstant: 50).isActive = false
-        stackConsumtion.addArrangedSubview(txtPeices)
-        stackConsumtion.addArrangedSubview(valueUssaly)
-        stackConsumtion.axis = .vertical
-        stackConsumtion.spacing = 10
-        stackConsumtion.alignment = .fill
-        view.addSubview(stackConsumtion)
-        stackConsumtion.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 50,
-                                      leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                                      trailingAnchor: view.layoutMarginsGuide.trailingAnchor )
+        consumptionStackView = UIStackView(arrangedSubviews: [perDayUssaly, currentConsumptionTextfield, line])
+        consumptionStackView.axis = .vertical
+        consumptionStackView.spacing = 16
         
+        view.addSubview(consumptionStackView)
+        
+        consumptionStackView.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
     private func setupSlider() {
         
-        goalText.text = "Set your Goal"
+        let goalText = UILabel()
+        goalText.text = "Set your daily goal"
         goalText.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        reduce.text = "Reduce : 2 piece(s) / week"
-        reduce.font = UIFont.preferredFont(forTextStyle: .footnote)
+        reducePerWeekLabel.text = "Reduce: 2 piece(s) / day"
+        reducePerWeekLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
-        slide.minimumValue = 0
-        slide.isContinuous = true
-        slide.tintColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-        slide.thumbTintColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        slide.addTarget(self, action: #selector(sliderValue(_:)), for: .valueChanged)
+        goalSlider.tintColor = Color.primary
+        goalSlider.addTarget(self, action: #selector(sliderValue(_:)), for: .valueChanged)
         
-        goalValue.font = UIFont.preferredFont(forTextStyle: .title3)
-        goalValue.layer.borderColor = UIColor.green.cgColor
-        goalValue.layer.backgroundColor = UIColor.white.cgColor
-        goalValue.layer.borderWidth = 0.0
-        goalValue.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        goalValue.layer.shadowOpacity = 1.0
-        goalValue.layer.shadowRadius = 0.0
+        let line = UIView()
+        line.backgroundColor = .label
+        line.setConstraint(heighAnchorConstant: 2)
         
-        stackSlider.addArrangedSubview(goalText)
-        stackSlider.addArrangedSubview(slide)
-        stackSlider.addArrangedSubview(goalValue)
-        stackSlider.addArrangedSubview(reduce)
-        stackSlider.axis = .vertical
-        stackSlider.spacing = 15
-        stackSlider.alignment = .fill
-        view.addSubview(stackSlider)
+        goalLabel.text = "0 piece"
+        goalLabel.font = .preferredFont(forTextStyle: .title2)
+        goalLabel.font = .boldSystemFont(ofSize: 22)
         
-        stackSlider.setConstraint(topAnchor: stackConsumtion.bottomAnchor, topAnchorConstant: 50,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        sliderStackView = UIStackView(arrangedSubviews: [goalText, goalLabel, goalSlider, reducePerWeekLabel])
+        sliderStackView.axis = .vertical
+        sliderStackView.spacing = 16
+        sliderStackView.setCustomSpacing(16, after: goalLabel)
+        view.addSubview(sliderStackView)
+        
+        sliderStackView.setConstraint(
+            topAnchor: consumptionStackView.bottomAnchor, topAnchorConstant: 56,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
-    private func setupDateText() {
+    private func setupTextfield() {
+        
+        let label = UILabel()
+        label.text = "When you would like to start?"
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        let line = UIView()
+        line.backgroundColor = .label
+        line.setConstraint(heighAnchorConstant: 2)
+        
+        let stackView = UIStackView(arrangedSubviews: [label, txtDatePicker, line])
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        view.addSubview(stackView)
+        
+        stackView.setConstraint(topAnchor: sliderStackView.bottomAnchor, topAnchorConstant: 56,
+                                    leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+                                    trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
+    }
+    
+    private func setupDate() {
+        
+        let perDayMuch = UILabel()
         perDayMuch.text = "When you whould like to start ?"
         perDayMuch.font = UIFont.preferredFont(forTextStyle: .title3)
         
         view.addSubview(perDayMuch)
         
-        perDayMuch.setConstraint(topAnchor: stackSlider.bottomAnchor, topAnchorConstant: 50,
+        perDayMuch.setConstraint(topAnchor: sliderStackView.bottomAnchor, topAnchorConstant: 56,
                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-    }
-    
-    private func setupDate() {
-        startText.text = "Start"
-        startText.font = UIFont.preferredFont(forTextStyle: .title3)
-        endText.text = "End"
-        endText.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        stackStartEnd.addArrangedSubview(startText)
-        stackStartEnd.addArrangedSubview(endText)
-        stackStartEnd.axis = .horizontal
-        stackStartEnd.spacing = 0
-        stackStartEnd.alignment = .fill
-        view.addSubview(stackStartEnd)
-        
-        stackStartEnd.setConstraint(topAnchor: stackSlider.bottomAnchor, topAnchorConstant: 100,
+        let startLabel = UILabel()
+        let endLabel = UILabel()
+        startLabel.text = "Start"
+        startLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        endLabel.text = "End"
+        endLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+
+        startEndStackView = UIStackView(arrangedSubviews: [startLabel, endLabel])
+        startEndStackView.axis = .horizontal
+        startEndStackView.distribution = .fillEqually
+        startEndStackView.spacing = 16
+        view.addSubview(startEndStackView)
+
+        startEndStackView.setConstraint(topAnchor: perDayMuch.bottomAnchor, topAnchorConstant: 32,
                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                                 trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -100)
-        
-        stack4.addArrangedSubview(txtDatePicker)
-        stack4.addArrangedSubview(txtDatePicker2)
-        stack4.axis = .horizontal
-        stack4.spacing = 70
-        stack4.distribution = .fillEqually
-        view.addSubview(stack4)
-        stack4.setConstraint(topAnchor: stackStartEnd.bottomAnchor, topAnchorConstant: 30,
-                             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor , bottomAnchorConstant: -50,
-                                leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+
+        dateStackView = UIStackView(arrangedSubviews: [txtDatePicker, txtDatePicker2])
+        dateStackView.axis = .horizontal
+        dateStackView.spacing = 16
+        dateStackView.distribution = .fillEqually
+        view.addSubview(dateStackView)
+        dateStackView.setConstraint(topAnchor: startEndStackView.bottomAnchor, topAnchorConstant: 16,
+                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
     }
     
     // MARK: Date
@@ -206,7 +214,7 @@ class PlanningViewController: UIViewController {
     @objc func valuechangedDateStart(sender: UIDatePicker) {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .long
-        dateFormat.dateFormat = "E dd MMM"
+        dateFormat.dateFormat = "E, dd MMM YYYY"
         self.txtDatePicker.text = dateFormat.string(from: sender.date)
     }
     
@@ -219,25 +227,24 @@ class PlanningViewController: UIViewController {
     
     // MARK: Slider
     @objc func sliderValue(_ sender:UISlider) {
-        goalValue.text = "\(String(Int(sender.value))) Pieces"
+        goalLabel.text = "\(String(Int(sender.value))) Pieces"
     }
     
     @objc func perWeekValue(_ sender:UITextField) {
-        guard let valuePerDay = sender.text else{ return }
+        guard let valuePerDay = sender.text else { return }
         
         if sender.text != "" {
             guard let valueDay = Int(valuePerDay) else { return }
             let valuePerWeek = (Int(valueDay) * 7) - 2
             valueUssaly.text = "Estimated : \(valuePerWeek) piece(s) / week"
-            slide.maximumValue = Float(valuePerWeek)
-            slide.value = Float(valuePerWeek)
-            goalValue.text = "\(valuePerWeek)"
+            goalSlider.maximumValue = Float(valuePerWeek)
+            goalSlider.value = Float(valuePerWeek)
+            goalLabel.text = "\(valuePerWeek)"
         } else {
             valueUssaly.text = "Estimated : 0 piece(s) / week"
-            goalValue.text = "0 Pieces"
-            reduce.text = "Reduce : 0 piece(s) / week"
+            goalLabel.text = "0 Pieces"
+            reducePerWeekLabel.text = "Reduce : 0 piece(s) / week"
         }
-        
     }
     
 }

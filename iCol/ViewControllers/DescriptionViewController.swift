@@ -21,7 +21,7 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        navigationItem.title = "Eat Less Gorengan"
+//        navigationItem.title = "Eat Less Gorengan"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -31,11 +31,11 @@ class DescriptionViewController: UIViewController {
     
     private func setupDescription() {
         descriptionLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna libero, fermentum eu nunc non, varius rutrum ex.  Donec non libero massa. Vestibulum vestibulum, mi vel aliquet placerat, odio risus vestibulum libero, ut ullamcorper sem neque id ligula."
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.numberOfLines = 0
         view.addSubview(descriptionLabel)
         
-        descriptionLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+        descriptionLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 8,
                                        leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                        trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
@@ -51,8 +51,8 @@ class DescriptionViewController: UIViewController {
         
         takeBtn.setConstraint(bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -16,
                               leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        takeBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
+                              heighAnchorConstant: 50)
         takeBtn.addTarget(self, action: #selector(handlePlanning(_:)), for: .touchUpInside)
     }
     
