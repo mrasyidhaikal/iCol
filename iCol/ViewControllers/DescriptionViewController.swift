@@ -47,6 +47,12 @@ class DescriptionViewController: UIViewController {
                               leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                               trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         takeBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        takeBtn.addTarget(self, action: #selector(handlePlanning(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func handlePlanning(_ button:UIButton) {
+        let vc = PlanningViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 
