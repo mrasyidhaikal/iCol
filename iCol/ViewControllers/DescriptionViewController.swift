@@ -26,7 +26,7 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupBackground() {
-        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+        view.backgroundColor = .systemBackground
     }
     
     private func setupDescription() {
@@ -42,7 +42,7 @@ class DescriptionViewController: UIViewController {
     
     private func setupButton() {
         let takeBtn = UIButton(type: .system)
-        takeBtn.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.3882352941, blue: 0.337254902, alpha: 1)
+        takeBtn.backgroundColor = Color.primary
         takeBtn.setTitleColor(UIColor.white, for: .normal)
         takeBtn.setTitle("Take The Challenge", for: .normal)
         takeBtn.titleLabel?.font = .boldSystemFont(ofSize: 18)

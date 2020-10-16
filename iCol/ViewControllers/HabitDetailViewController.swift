@@ -9,8 +9,11 @@ import UIKit
 
 class HabitDetailViewController: UIViewController {
     
-    let challengeOverview = ChallengeOverview()
+    let challengeOverview = HabitOverview()
     let challengeProgressView = ChallengeProgressView()
+    
+    let totalEatPerDayLabel = UILabel()
+    var totalEatPerDay: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +25,175 @@ class HabitDetailViewController: UIViewController {
     
     private func setupNavigation() {
         navigationItem.title = "Detail Habit"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(handleSave))
+    }
+    
+    @objc private func handleSave() {
+        dismiss(animated: true) {
+            // Do something
+        }
     }
     
     private func setupUI() {
         
         view.addSubview(challengeOverview)
-        view.addSubview(challengeProgressView)
         
-        challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+        let updateLabel = UILabel()
+        updateLabel.text = "Update Today Progress"
+        updateLabel.font = .preferredFont(forTextStyle: .title2)
+        updateLabel.font = .boldSystemFont(ofSize: 24)
+        view.addSubview(updateLabel)
+        
+        totalEatPerDayLabel.text = "\(totalEatPerDay)"
+        totalEatPerDayLabel.font = .preferredFont(forTextStyle: .title1)
+        
+        let stepper = UIStepper()
+        stepper.minimumValue = 0
+        stepper.autorepeat = true
+        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+        
+        let stackView = UIStackView(arrangedSubviews: [totalEatPerDayLabel, stepper])
+        stackView.spacing = 32
+        stackView.axis = .horizontal
+        view.addSubview(stackView)
+        
+        let divider = UIView()
+        divider.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
+        view.addSubview(divider)
+        
+        updateLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0)
+        
+        stackView.setConstraint(topAnchor: updateLabel.bottomAnchor, topAnchorConstant: 64,
+                                centerXAnchor: view.centerXAnchor)
+        
+        divider.setConstraint(topAnchor: stackView.bottomAnchor, topAnchorConstant: 64,
+                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
+                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        challengeOverview.setConstraint(topAnchor: divider.bottomAnchor, topAnchorConstant: 64,
                                         leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                         trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        challengeProgressView.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 56,
-                                            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0,
-                                            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: 0)
+    }
+    
+    @objc private func stepperValueChanged(_ sender: UIStepper) {
+        totalEatPerDay = Int(sender.value)
+        totalEatPerDayLabel.text = "\(totalEatPerDay)"
     }
     
 }
+
+class HabitOverview: UIView {
+    
+    let percentageLabel = UILabel()
+    let remainingDay = UILabel()
+    let progressBar = ProgressBarView()
+    var totalEat = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Habit Overview"
+        titleLabel.font = .preferredFont(forTextStyle: .title2)
+        titleLabel.font = .boldSystemFont(ofSize: 24)
+        addSubview(titleLabel)
+
+        percentageLabel.text = "40%"
+        percentageLabel.font = .preferredFont(forTextStyle: .title2)
+        percentageLabel.font = .boldSystemFont(ofSize: 24)
+
+        remainingDay.text = "4 days till challenge ends"
+        remainingDay.font = .preferredFont(forTextStyle: .body)
+
+        let percentageStackView = UIStackView(arrangedSubviews: [percentageLabel, remainingDay])
+        percentageStackView.axis = .horizontal
+        percentageStackView.distribution = .equalCentering
+        addSubview(percentageStackView)
+
+        progressBar.percentage = 0.2
+        addSubview(progressBar)
+
+        let doneSymbol = UIView()
+        doneSymbol.backgroundColor = #colorLiteral(red: 0.176264137, green: 0.3899727762, blue: 0.334807694, alpha: 1)
+        doneSymbol.translatesAutoresizingMaskIntoConstraints = false
+        doneSymbol.layer.cornerRadius = 6
+
+        let doneLabel = UILabel()
+        doneLabel.text = "Done"
+        doneLabel.font = .preferredFont(forTextStyle: .footnote)
+
+        let doneStackView = UIStackView(arrangedSubviews: [doneSymbol, doneLabel])
+        doneStackView.axis = .horizontal
+        doneStackView.spacing = 4
+        addSubview(doneStackView)
+
+        let textSymbol = UIView()
+        textSymbol.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
+        textSymbol.translatesAutoresizingMaskIntoConstraints = false
+        textSymbol.layer.cornerRadius = 6
+
+        let textLabel = UILabel()
+        textLabel.text = "Text"
+        textLabel.font = .preferredFont(forTextStyle: .footnote)
+
+        let textStackView = UIStackView(arrangedSubviews: [textSymbol, textLabel])
+        textStackView.axis = .horizontal
+        textStackView.spacing = 4
+        addSubview(textStackView)
+
+        let totalYouEatLabel = UILabel()
+        totalYouEatLabel.text = "Total you eat"
+        totalYouEatLabel.font = .preferredFont(forTextStyle: .body)
+        addSubview(totalYouEatLabel)
+
+        totalEat.text = "34"
+        totalEat.font = .preferredFont(forTextStyle: .title1)
+        totalEat.font = .boldSystemFont(ofSize: 32)
+        addSubview(totalEat)
+
+        titleLabel.setConstraint(topAnchor: topAnchor,
+                                 leadingAnchor: leadingAnchor,
+                                 trailingAnchor: trailingAnchor)
+
+        percentageStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 16,
+                                          leadingAnchor: leadingAnchor,
+                                          trailingAnchor: trailingAnchor)
+
+        progressBar.setConstraint(topAnchor: percentageStackView.bottomAnchor, topAnchorConstant: 8,
+                                  leadingAnchor: leadingAnchor,
+                                  trailingAnchor: trailingAnchor)
+
+        textStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
+                                    trailingAnchor: trailingAnchor)
+
+        doneStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
+                                    trailingAnchor: textStackView.leadingAnchor, trailingAnchorConstant: -24)
+
+        doneSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        doneSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
+
+        textSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        textSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
+
+        totalYouEatLabel.setConstraint(topAnchor: doneStackView.bottomAnchor, topAnchorConstant: 24,
+                                       leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                                       trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
+
+        totalEat.setConstraint(topAnchor: totalYouEatLabel.bottomAnchor, topAnchorConstant: 8,
+                               bottomAnchor: bottomAnchor,
+                               leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                               trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+
 
 class ChallengeProgressView: UIView {
     
@@ -153,111 +308,5 @@ extension ChallengeProgressView: UICollectionViewDelegateFlowLayout, UICollectio
         return cell
     }
     
-}
-
-class ChallengeOverview: UIView {
-    
-    let percentageLabel = UILabel()
-    let remainingDay = UILabel()
-    let progressBar = ProgressBarView()
-    var totalEat = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Challenge Overview"
-        addSubview(titleLabel)
-
-        percentageLabel.text = "40%"
-        percentageLabel.font = .preferredFont(forTextStyle: .title2)
-
-        remainingDay.text = "4 days till challenge ends"
-        remainingDay.font = .preferredFont(forTextStyle: .footnote)
-
-        let percentageStackView = UIStackView(arrangedSubviews: [percentageLabel, remainingDay])
-        percentageStackView.axis = .horizontal
-        percentageStackView.distribution = .equalCentering
-        addSubview(percentageStackView)
-
-        progressBar.percentage = 0.2
-        addSubview(progressBar)
-
-        let doneSymbol = UIView()
-        doneSymbol.backgroundColor = #colorLiteral(red: 0.176264137, green: 0.3899727762, blue: 0.334807694, alpha: 1)
-        doneSymbol.translatesAutoresizingMaskIntoConstraints = false
-        doneSymbol.layer.cornerRadius = 6
-
-        let doneLabel = UILabel()
-        doneLabel.text = "Done"
-        doneLabel.font = .preferredFont(forTextStyle: .footnote)
-
-        let doneStackView = UIStackView(arrangedSubviews: [doneSymbol, doneLabel])
-        doneStackView.axis = .horizontal
-        doneStackView.spacing = 4
-        addSubview(doneStackView)
-
-        let textSymbol = UIView()
-        textSymbol.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
-        textSymbol.translatesAutoresizingMaskIntoConstraints = false
-        textSymbol.layer.cornerRadius = 6
-
-        let textLabel = UILabel()
-        textLabel.text = "Text"
-        textLabel.font = .preferredFont(forTextStyle: .footnote)
-
-        let textStackView = UIStackView(arrangedSubviews: [textSymbol, textLabel])
-        textStackView.axis = .horizontal
-        textStackView.spacing = 4
-        addSubview(textStackView)
-
-        let totalYouEatLabel = UILabel()
-        totalYouEatLabel.text = "Total you eat"
-        totalYouEatLabel.font = .preferredFont(forTextStyle: .body)
-        addSubview(totalYouEatLabel)
-
-        totalEat.text = "34"
-        totalEat.font = .preferredFont(forTextStyle: .title1)
-        totalEat.font = .boldSystemFont(ofSize: 32)
-        addSubview(totalEat)
-
-        titleLabel.setConstraint(topAnchor: topAnchor,
-                                 leadingAnchor: leadingAnchor,
-                                 trailingAnchor: trailingAnchor)
-
-        percentageStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 16,
-                                          leadingAnchor: leadingAnchor,
-                                          trailingAnchor: trailingAnchor)
-
-        progressBar.setConstraint(topAnchor: percentageStackView.bottomAnchor, topAnchorConstant: 8,
-                                  leadingAnchor: leadingAnchor,
-                                  trailingAnchor: trailingAnchor)
-
-        textStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
-                                    trailingAnchor: trailingAnchor)
-
-        doneStackView.setConstraint(topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
-                                    trailingAnchor: textStackView.leadingAnchor, trailingAnchorConstant: -24)
-
-        doneSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        doneSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
-
-        textSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        textSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
-
-        totalYouEatLabel.setConstraint(topAnchor: doneStackView.bottomAnchor, topAnchorConstant: 24,
-                                       leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
-                                       trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
-
-        totalEat.setConstraint(topAnchor: totalYouEatLabel.bottomAnchor, topAnchorConstant: 8,
-                               bottomAnchor: bottomAnchor,
-                               leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
-                               trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }
 
