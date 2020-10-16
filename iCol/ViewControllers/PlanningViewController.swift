@@ -72,17 +72,11 @@ class PlanningViewController: UIViewController {
         datePick.addTarget(self, action: #selector(self.valuechangedDateEnd), for: .valueChanged)
         return txt
     }()
-    
-
-    
-    
-    
-    
-  
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackground()
         setupNavigation()
         setupConsumtion()
         setupSlider()
@@ -90,7 +84,9 @@ class PlanningViewController: UIViewController {
         setupDateText()
     }
     
-    
+    private func setupBackground() {
+        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+    }
     
     private func setupNavigation() {
         navigationItem.title = "Let’s set a plan!"
@@ -179,10 +175,8 @@ class PlanningViewController: UIViewController {
         perDayMuch.setConstraint(topAnchor: stackSlider.bottomAnchor, topAnchorConstant: 50,
                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        
-        
-        
     }
+    
     private func setupDate(){
         startText.text = "Start"
         startText.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -211,8 +205,6 @@ class PlanningViewController: UIViewController {
         stack4.setConstraint(topAnchor: stackStartEnd.bottomAnchor, topAnchorConstant: 30,bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor , bottomAnchorConstant: -50,
                                  leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                  trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        
-        
     }
     
 
@@ -240,27 +232,20 @@ class PlanningViewController: UIViewController {
     }
     
     @objc func perWeekValue(_ sender:UITextField) {
-        guard let valuePerDay = Int(sender.text!) else{return}
-        let valuePerWeek = (Int(valuePerDay) * 7) - 2
+        guard let valuePerDay = sender.text else{ return }
         
-        
-        if sender.text == "" {
-            valueUssaly.text = "Estimated : 0 piece(s) / week"
-            goalValue.text = "0 Pieces"
-            reduce.text = "Reduce : 0 piece(s) / week"
-        }
-        else if valuePerDay == 0 {
-            valueUssaly.text = "Estimated : 0 piece(s) / week"
-            goalValue.text = "0 Pieces"
-            reduce.text = "Reduce : 0 piece(s) / week"
-        }
-        else{
+        if sender.text != "" {
+            guard let valueDay = Int(valuePerDay) else { return }
+            let valuePerWeek = (Int(valueDay) * 7) - 2
             valueUssaly.text = "Estimated : \(valuePerWeek) piece(s) / week"
             slide.maximumValue = Float(valuePerWeek)
             slide.value = Float(valuePerWeek)
             goalValue.text = "\(valuePerWeek)"
+        } else {
+            valueUssaly.text = "Estimated : 0 piece(s) / week"
+            goalValue.text = "0 Pieces"
+            reduce.text = "Reduce : 0 piece(s) / week"
         }
-        
         
     }
     
