@@ -30,15 +30,16 @@ class HabitDetailViewController: UIViewController {
     }
     
     private func setupDetail() {
-        navigationItem.title = habit?.title
         
-        if let id = habit?.id {
+        if let id = habit?.id, let habit = habit {
+            
+            navigationItem.title = habit.title
             
             let totalEat = CoreDataService.shared.getTotalEat(id: id)
             
             challengeOverview.totalEat.text = "\(totalEat)"
             
-            let progress = Float(totalEat) / Float(habit!.totalValuePerWeek)
+            let progress = Float(totalEat) / Float(habit.totalValuePerWeek)
             let percentage = progress * 100
             
             if progress >= 1 {
@@ -49,6 +50,18 @@ class HabitDetailViewController: UIViewController {
                 challengeOverview.percentageLabel.text = "\(String(format: "%.0f", percentage))%"
             }
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd"
+            
+            let startDate = dateFormatter.string(from: Date())
+            let endDate = dateFormatter.string(from: habit.endDate!)
+            let remainingDay = Int(endDate)! - Int(startDate)!
+            
+            if remainingDay == 0 {
+                challengeOverview.remainingDay.text = "End today"
+            } else {
+                challengeOverview.remainingDay.text = "\(remainingDay) days remaining"
+            }
         }
         
     }
@@ -59,20 +72,45 @@ class HabitDetailViewController: UIViewController {
     
     @objc private func handleSave() {
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let day = SummaryDay(context: moc)
         
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         
+        let day = SummaryDay(context: moc)
         day.totalEatPerDay = Int32(totalEatPerDay)
-        day.currentDate = formatter.string(from: Date())
+        day.currentDate = Date()
         
+        guard let id = habit?.id else { return }
+        
+        let habitToUpdate = CoreDataService.shared.getHabit(id: id)
+
         do {
-            if let id = habit?.id {
-                let dataToUpdate = CoreDataService.shared.getHabit(id: id)
-                dataToUpdate.addToDays(day)
-                try moc.save()
+            if habitToUpdate.days?.count == 0 {
+                print("masih baru")
+                habitToUpdate.addToDays(day)
+            } else {
+                print(habitToUpdate.days?.count as Any)
+                
+                let days = habitToUpdate.days
+                let sortedDays = days?.sorted(by: { ($0 as! SummaryDay).currentDate! > ($1 as! SummaryDay).currentDate! })
+                
+                if sortedDays?.count == 1 {
+                    print("masih satu hari")
+                    let dayToUpdate = sortedDays?[0] as! SummaryDay
+                    dayToUpdate.totalEatPerDay += Int32(totalEatPerDay)
+                    dayToUpdate.currentDate = Date()
+                } else if ((sortedDays?[0] as AnyObject).currentDate!) < Date() && Date() > ((sortedDays?[1] as AnyObject).currentDate!) {
+                    print("today")
+                    let dayToUpdate = sortedDays?[0] as! SummaryDay
+                    dayToUpdate.totalEatPerDay = Int32(totalEatPerDay)
+                    dayToUpdate.currentDate = Date()
+                } else {
+                    print("Not today")
+                    habitToUpdate.addToDays(day)
+                }
             }
+            try moc.save()
+            
             
         } catch let err {
             print(err.localizedDescription)

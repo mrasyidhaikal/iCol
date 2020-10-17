@@ -95,8 +95,8 @@ class PlanningViewController: UIViewController {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .long
         dateFormat.dateFormat = "E, dd MMM YYYY"
-        startDateTextField.text = dateFormat.string(from: sender.date)
         
+        startDateTextField.text = dateFormat.string(from: sender.date)
         endDate = Calendar.current.date(byAdding: .day, value: 7, to: sender.date)
     }
     
@@ -114,10 +114,8 @@ class PlanningViewController: UIViewController {
             let valuePerWeek = (Int(valueDay) * 7) - 2 * 7
             
             if valuePerWeek <= -7 {
-                goalSlider.minimumValue = 0
                 goalSlider.maximumValue = 0
                 goalLabel.text = "\(0) piece(s)"
-                print("dkfj")
             } else {
                 goalSlider.maximumValue = Float(valuePerWeek)
                 goalSlider.setValue(Float(valuePerWeek), animated: true)

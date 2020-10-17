@@ -9,7 +9,7 @@
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SummaryDay" inverseName="belongToHabit" inverseEntity="SummaryDay"/>
     </entity>
     <entity name="SummaryDay" representedClassName="SummaryDay" syncable="YES" codeGenerationType="class">
-        <attribute name="currentDate" optional="YES" attributeType="String"/>
+        <attribute name="currentDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalEatPerDay" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="belongToHabit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Habit" inverseName="days" inverseEntity="Habit"/>
     </entity>
