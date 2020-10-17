@@ -11,6 +11,7 @@ class PlanningViewController: UIViewController {
     
     var titleHabit: String = ""
     var type: Type?
+    private var endDate: Date?
     
     private let goalSlider = UISlider()
     private let goalLabel = UILabel()
@@ -23,6 +24,17 @@ class PlanningViewController: UIViewController {
     
     private let currentConsumptionTextfield = UITextField()
     
+    private let datePicker: UIDatePicker = {
+        let datePick = UIDatePicker()
+        datePick.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            datePick.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        return datePick
+    }()
+    
     private lazy var startDateTextField: UITextField = {
         let tf = UITextField()
         tf.rightView = UIImageView(image: UIImage(systemName: "calendar"))
@@ -31,16 +43,10 @@ class PlanningViewController: UIViewController {
         tf.borderStyle = .none
         tf.placeholder = "Enter your date"
 
-        let datePick = UIDatePicker()
-        datePick.datePickerMode = .date
-        if #available(iOS 13.4, *) {
-            datePick.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
-        tf.inputView = datePick
         
-        datePick.addTarget(self, action: #selector(self.valuechangedDateStart), for: .valueChanged)
+        tf.inputView = datePicker
+        
+        datePicker.addTarget(self, action: #selector(self.valuechangedDateStart), for: .valueChanged)
         return tf
     }()
     
@@ -70,11 +76,12 @@ class PlanningViewController: UIViewController {
     @objc func handleCreatePlan() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let plan = Planning(context: context)
+        let plan = Habit(context: context)
         plan.id = UUID()
         plan.title = titleHabit
-        plan.startDate = startDateTextField.text
-        plan.totalValuePerWeek = Int64(Int(goalSlider.value))
+        plan.startDate = datePicker.date
+        plan.totalValuePerWeek = Int32(Int(goalSlider.value))
+        plan.endDate = endDate
         
         do {
             try context.save()
@@ -83,6 +90,42 @@ class PlanningViewController: UIViewController {
         }
         
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func valuechangedDateStart(sender: UIDatePicker) {
+        let dateFormat = DateFormatter()
+        dateFormat.dateStyle = .long
+        dateFormat.dateFormat = "E, dd MMM YYYY"
+        startDateTextField.text = dateFormat.string(from: sender.date)
+        
+        endDate = Calendar.current.date(byAdding: .day, value: 7, to: sender.date)
+    }
+    
+    @objc func sliderValue(_ sender:UISlider) {
+        goalLabel.text = "\(String(Int(sender.value))) piece(s)"
+    }
+    
+    @objc func perWeekValue(_ sender:UITextField) {
+        guard let valuePerDay = sender.text else { return }
+        
+        if sender.text != "" {
+            
+            guard let valueDay = Int(valuePerDay) else { return }
+            let valuePerWeek = (Int(valueDay) * 7) - 2 * 7
+            print(valuePerWeek)
+            goalSlider.minimumValue = 0
+            
+            if valuePerWeek <= -7 {
+                goalSlider.minimumValue = 0
+                goalSlider.maximumValue = 0
+            } else {
+                goalSlider.maximumValue = Float(valuePerWeek)
+            }
+            goalLabel.text = "\(valuePerWeek)"
+            
+        } else {
+            goalLabel.text = "0 Pieces"
+        }
     }
     
     private func setupConsumtion() {
@@ -122,7 +165,7 @@ class PlanningViewController: UIViewController {
         reducePerWeekLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
         goalSlider.tintColor = Color.primary
-        goalSlider.addTarget(self, action: #selector(sliderValue(_:)), for: .valueChanged)
+        goalSlider.addTarget(self, action: #selector(sliderValue(_: )), for: .valueChanged)
         
         let line = UIView()
         line.backgroundColor = .label
@@ -168,38 +211,13 @@ class PlanningViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @objc func valuechangedDateStart(sender: UIDatePicker) {
-        let dateFormat = DateFormatter()
-        dateFormat.dateStyle = .long
-        dateFormat.dateFormat = "E, dd MMM YYYY"
-        startDateTextField.text = dateFormat.string(from: sender.date)
-    }
-    
-    @objc func sliderValue(_ sender:UISlider) {
-        goalLabel.text = "\(String(Int(sender.value))) piece(s)"
-    }
-    
-    @objc func perWeekValue(_ sender:UITextField) {
-        guard let valuePerDay = sender.text else { return }
+}
+
+extension String {
+    func formatShortDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
         
-        if sender.text != "" {
-            
-            guard let valueDay = Int(valuePerDay) else { return }
-            let valuePerWeek = (Int(valueDay) * 7) - 2 * 7
-            print(valuePerWeek)
-            goalSlider.minimumValue = 0
-            
-            if valuePerWeek <= -7 {
-                goalSlider.minimumValue = 0
-                goalSlider.maximumValue = 0
-            } else {
-                goalSlider.maximumValue = Float(valuePerWeek)
-            }
-            goalLabel.text = "\(valuePerWeek)"
-            
-        } else {
-            goalLabel.text = "0 Pieces"
-        }
+        return dateFormatter.string(from: date)
     }
-    
 }

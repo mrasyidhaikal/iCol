@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PlanningConstant {
-    static let entityName = "Planning"
+struct HabitConstant {
+    static let entityName = "Habit"
     static let id = "id"
     static let title = "title"
     static let totalValuePerWeek = "totalValuePerWeek"

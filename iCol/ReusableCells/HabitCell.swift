@@ -16,10 +16,26 @@ class HabitCell: UITableViewCell {
     private let percentageLabel = UILabel()
     private let progressBar = UIProgressView()
     
-    func setupHabitCell(habit: Planning) {
-        titleLabel.text = habit.title
-        percentageLabel.text = "0%"
-        progressBar.progress = 0.0
+    func setupHabitCell(habit: Habit) {
+        if let id = habit.id {
+            
+            titleLabel.text = habit.title
+            
+            let totalEat = CoreDataService.shared.getTotalEat(id: id)
+            descLabel.text = "\(totalEat) food eaten"
+            
+            let progress = Float(totalEat) / Float(habit.totalValuePerWeek)
+            let percentage = progress * 100
+            
+            if progress >= 1 {
+                progressBar.progress = 1
+                percentageLabel.text = "100%"
+            } else {
+                progressBar.progress = progress
+                percentageLabel.text = "\(String(format: "%.0f", percentage))%"
+            }
+        }
+        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,7 +43,6 @@ class HabitCell: UITableViewCell {
         
         let containerView = UIView()
         containerView.layer.cornerRadius = 16
-        containerView.clipsToBounds = false
         containerView.backgroundColor = .systemBackground
         containerView.addShadow(color: .black, opacity: 0.1, radius: 10, offset: CGSize(width: 0, height: 4))
         addSubview(containerView)
@@ -37,30 +52,15 @@ class HabitCell: UITableViewCell {
         containerView.addSubview(titleLabel)
         
         let descImageLabel = UIImageView()
-        descImageLabel.image = UIImage(systemName: "flame")
+        descImageLabel.image = UIImage(named: "food")
         descImageLabel.tintColor = .label
-        descLabel.text = "9 gorengan eaten"
+        descImageLabel.setConstraint(heighAnchorConstant: 15, widthAnchorConstant: 15)
         descLabel.font = .preferredFont(forTextStyle: .body)
         
         let descLabelStackView = UIStackView(arrangedSubviews: [descImageLabel, descLabel])
         descLabelStackView.axis = .horizontal
-        descLabelStackView.spacing = 4
+        descLabelStackView.spacing = 8
         addSubview(descLabelStackView)
-        
-//        let timeImageLabel = UIImageView()
-//        timeImageLabel.image = UIImage(systemName: "alarm")
-//        timeImageLabel.tintColor = .label
-//        timeLabel.text = "02:00 PM"
-//        timeLabel.font = .preferredFont(forTextStyle: .footnote)
-//
-//        let timeStackView = UIStackView(arrangedSubviews: [timeImageLabel, timeLabel])
-//        timeStackView.axis = .horizontal
-//        timeStackView.spacing = 4
-        
-//        let descStackView = UIStackView(arrangedSubviews: [descLabelStackView, timeStackView])
-//        descStackView.axis = .horizontal
-//        descStackView.distribution = .equalCentering
-//        containerView.addSubview(descStackView)
         
         percentageLabel.font = .preferredFont(forTextStyle: .body)
         containerView.addSubview(percentageLabel)
@@ -68,29 +68,30 @@ class HabitCell: UITableViewCell {
         progressBar.progressTintColor = Color.primary
         containerView.addSubview(progressBar)
         
-        containerView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 8,
-                                    bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
-                                    leadingAnchor: layoutMarginsGuide.leadingAnchor,
-                                    trailingAnchor: layoutMarginsGuide.trailingAnchor)
+        containerView.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 8,
+            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
+            leadingAnchor: layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: layoutMarginsGuide.trailingAnchor)
         
-        titleLabel.setConstraint(topAnchor: containerView.topAnchor, topAnchorConstant: 16,
-                                 leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
+        titleLabel.setConstraint(
+            topAnchor: containerView.topAnchor, topAnchorConstant: 16,
+            leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
         
-        descLabelStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
-                                         leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
+        descLabelStackView.setConstraint(
+            topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
+            leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24)
         
-//        descStackView.setConstraint(topAnchor: titleLabel.bottomAnchor, topAnchorConstant: 8,
-//                                    leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
-//                                    trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
+        percentageLabel.setConstraint(
+            topAnchor: descLabelStackView.bottomAnchor, topAnchorConstant: 0,
+            trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
         
-        percentageLabel.setConstraint(topAnchor: descLabelStackView.bottomAnchor, topAnchorConstant: 0,
-                                      trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24)
-
-        progressBar.setConstraint(topAnchor: percentageLabel.bottomAnchor, topAnchorConstant: 8,
-                                  bottomAnchor: containerView.bottomAnchor, bottomAnchorConstant: -16,
-                                  leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
-                                  trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24,
-                                  heighAnchorConstant: 6)
+        progressBar.setConstraint(
+            topAnchor: percentageLabel.bottomAnchor, topAnchorConstant: 8,
+            bottomAnchor: containerView.bottomAnchor, bottomAnchorConstant: -16,
+            leadingAnchor: containerView.leadingAnchor, leadingAnchorConstant: 24,
+            trailingAnchor: containerView.trailingAnchor, trailingAnchorConstant: -24,
+            heighAnchorConstant: 6)
     }
     
     required init?(coder: NSCoder) {

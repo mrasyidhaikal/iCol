@@ -41,12 +41,13 @@ class ChallengeViewController: UICollectionViewController {
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) ->
             NSCollectionLayoutSection? in
           
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.55)))
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6)))
             item.contentInsets.bottom = 16
-            item.contentInsets.trailing = 8
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)), subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets.top = 20
+            section.contentInsets.leading = 16
+            section.contentInsets.trailing = 16
             
             return section
         }

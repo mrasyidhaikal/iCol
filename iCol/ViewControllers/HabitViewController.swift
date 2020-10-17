@@ -8,30 +8,10 @@
 import UIKit
 import CoreData
 
-class CoreDataService {
-    
-    static let shared = CoreDataService()
-    
-    func fetchFromCoreData(completion: @escaping ([Planning]) -> ()) {
-        
-        let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<Planning>(entityName: PlanningConstant.entityName)
-        
-        do {
-            let results = try moc.fetch(fetchRequest)
-            completion(results)
-        } catch let err {
-            print(err.localizedDescription)
-        }
-        
-    }
-    
-}
 
-class HabitViewController: UITableViewController {
+class HabitViewController: UITableViewController, DismissDetailHabit {
     
-    private var habits: [Planning] = []
+    private var habits: [Habit] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +19,6 @@ class HabitViewController: UITableViewController {
         
         setupNavigation()
         setupTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +47,15 @@ class HabitViewController: UITableViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func didSendTotal(isDismiss: Bool) {
+        if isDismiss {
+            CoreDataService.shared.fetchFromCoreData { (result) in
+                self.habits = result
+            }
+            tableView.reloadData()
+        }
+    }
+    
 }
 
 extension HabitViewController {
@@ -85,8 +73,20 @@ extension HabitViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = UINavigationController(rootViewController: HabitDetailViewController())
-        present(vc, animated: true)
+        let vc = HabitDetailViewController()
+        vc.habit = habits[indexPath.row]
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            CoreDataService.shared.deleteHabit(id: habits[indexPath.row].id!)
+            habits.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+        }
     }
     
 }

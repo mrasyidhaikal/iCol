@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */; };
 		2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA0825355AE400E1D0E2 /* HabitCell.swift */; };
+		234FDA09253B18850023CE44 /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = 234FDA08253B18850023CE44 /* Group.png */; };
 		235312CC253ADD2F00D3F321 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235312CB253ADD2F00D3F321 /* Constant.swift */; };
 		235A316D2536E558000BD305 /* HabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A316C2536E558000BD305 /* HabitDetailViewController.swift */; };
+		235F38AC253B1DDF00CCEE5D /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F38AB253B1DDF00CCEE5D /* CoreDataService.swift */; };
 		238BED7B2539E5370078AFD9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BED7A2539E5370078AFD9 /* Color.swift */; };
 		239C506B253988E3008017CB /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239C506A253988E3008017CB /* DayCell.swift */; };
 		239C507025398944008017CB /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239C506F25398944008017CB /* ProgressBarView.swift */; };
@@ -31,8 +33,10 @@
 /* Begin PBXFileReference section */
 		2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		2309AA0825355AE400E1D0E2 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
+		234FDA08253B18850023CE44 /* Group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Group.png; sourceTree = "<group>"; };
 		235312CB253ADD2F00D3F321 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		235A316C2536E558000BD305 /* HabitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewController.swift; sourceTree = "<group>"; };
+		235F38AB253B1DDF00CCEE5D /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		238BED7A2539E5370078AFD9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		239C506A253988E3008017CB /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		239C506F25398944008017CB /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 				239C506A253988E3008017CB /* DayCell.swift */,
 			);
 			path = ReusableCells;
+			sourceTree = "<group>";
+		};
+		235F38AA253B1DD100CCEE5D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				235F38AB253B1DDF00CCEE5D /* CoreDataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		238BED792539E52C0078AFD9 /* Constant */ = {
@@ -147,6 +159,7 @@
 		A2A5536E25341FDD00219048 /* iCol */ = {
 			isa = PBXGroup;
 			children = (
+				235F38AA253B1DD100CCEE5D /* Services */,
 				238BED792539E52C0078AFD9 /* Constant */,
 				263F37B52536AFB1009D7608 /* Models */,
 				23D06A1725345B6900845C6F /* Base */,
@@ -157,6 +170,7 @@
 				A2A5537D25341FDE00219048 /* LaunchScreen.storyboard */,
 				A2A5538025341FDE00219048 /* Info.plist */,
 				A2A5537825341FDD00219048 /* iCol.xcdatamodeld */,
+				234FDA08253B18850023CE44 /* Group.png */,
 				A2A5537B25341FDE00219048 /* Assets.xcassets */,
 			);
 			path = iCol;
@@ -220,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A5537F25341FDE00219048 /* LaunchScreen.storyboard in Resources */,
+				234FDA09253B18850023CE44 /* Group.png in Resources */,
 				A2A5537C25341FDE00219048 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +262,7 @@
 				239C506B253988E3008017CB /* DayCell.swift in Sources */,
 				A2A5537025341FDD00219048 /* AppDelegate.swift in Sources */,
 				235A316D2536E558000BD305 /* HabitDetailViewController.swift in Sources */,
+				235F38AC253B1DDF00CCEE5D /* CoreDataService.swift in Sources */,
 				A2A5537225341FDD00219048 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
