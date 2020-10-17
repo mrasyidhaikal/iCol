@@ -6,8 +6,32 @@
 //
 
 import UIKit
+import CoreData
+
+class CoreDataService {
+    
+    static let shared = CoreDataService()
+    
+    func fetchFromCoreData(completion: @escaping ([Planning]) -> ()) {
+        
+        let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Planning>(entityName: PlanningConstant.entityName)
+        
+        do {
+            let results = try moc.fetch(fetchRequest)
+            completion(results)
+        } catch let err {
+            print(err.localizedDescription)
+        }
+        
+    }
+    
+}
 
 class HabitViewController: UITableViewController {
+    
+    private var habits: [Planning] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +39,15 @@ class HabitViewController: UITableViewController {
         
         setupNavigation()
         setupTableView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        CoreDataService.shared.fetchFromCoreData { (result) in
+            self.habits = result
+        }
+        tableView.reloadData()
     }
 
     private func setupNavigation() {
@@ -40,12 +73,13 @@ class HabitViewController: UITableViewController {
 extension HabitViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return habits.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitCell.reuseIdentifier, for: indexPath) as! HabitCell
         cell.backgroundColor = .clear
+        cell.setupHabitCell(habit: habits[indexPath.row])
         return cell
     }
 

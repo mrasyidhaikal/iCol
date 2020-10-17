@@ -11,29 +11,32 @@ class HabitCell: UITableViewCell {
     
     static let reuseIdentifier = "HabitCell"
     
-    let containerView = UIView()
-    let titleLabel = UILabel()
-    let descImageLabel = UIImageView()
-    let descLabel = UILabel()
-    let timeImageLabel = UIImageView()
-    let timeLabel = UILabel()
-    let percentageLabel = UILabel()
-    let progressBar = UIProgressView()
+    private let titleLabel = UILabel()
+    private let descLabel = UILabel()
+    private let percentageLabel = UILabel()
+    private let progressBar = UIProgressView()
+    
+    func setupHabitCell(habit: Planning) {
+        titleLabel.text = habit.title
+        percentageLabel.text = "0%"
+        progressBar.progress = 0.0
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier) 
         
+        let containerView = UIView()
         containerView.layer.cornerRadius = 16
         containerView.clipsToBounds = false
         containerView.backgroundColor = .systemBackground
         containerView.addShadow(color: .black, opacity: 0.1, radius: 10, offset: CGSize(width: 0, height: 4))
         addSubview(containerView)
         
-        titleLabel.text = "Eat less gorengan"
         titleLabel.font = .preferredFont(forTextStyle: .title2)
         titleLabel.font = .boldSystemFont(ofSize: 22)
         containerView.addSubview(titleLabel)
         
+        let descImageLabel = UIImageView()
         descImageLabel.image = UIImage(systemName: "flame")
         descImageLabel.tintColor = .label
         descLabel.text = "9 gorengan eaten"
@@ -44,6 +47,7 @@ class HabitCell: UITableViewCell {
         descLabelStackView.spacing = 4
         addSubview(descLabelStackView)
         
+//        let timeImageLabel = UIImageView()
 //        timeImageLabel.image = UIImage(systemName: "alarm")
 //        timeImageLabel.tintColor = .label
 //        timeLabel.text = "02:00 PM"
@@ -58,11 +62,9 @@ class HabitCell: UITableViewCell {
 //        descStackView.distribution = .equalCentering
 //        containerView.addSubview(descStackView)
         
-        percentageLabel.text = "40%"
         percentageLabel.font = .preferredFont(forTextStyle: .body)
         containerView.addSubview(percentageLabel)
         
-        progressBar.progress = 0.5
         progressBar.progressTintColor = Color.primary
         containerView.addSubview(progressBar)
         

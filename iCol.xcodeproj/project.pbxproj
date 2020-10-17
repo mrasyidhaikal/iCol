@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */; };
 		2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2309AA0825355AE400E1D0E2 /* HabitCell.swift */; };
+		235312CC253ADD2F00D3F321 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235312CB253ADD2F00D3F321 /* Constant.swift */; };
 		235A316D2536E558000BD305 /* HabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A316C2536E558000BD305 /* HabitDetailViewController.swift */; };
 		238BED7B2539E5370078AFD9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BED7A2539E5370078AFD9 /* Color.swift */; };
 		239C506B253988E3008017CB /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239C506A253988E3008017CB /* DayCell.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		2309AA03253559ED00E1D0E2 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		2309AA0825355AE400E1D0E2 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
+		235312CB253ADD2F00D3F321 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		235A316C2536E558000BD305 /* HabitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewController.swift; sourceTree = "<group>"; };
 		238BED7A2539E5370078AFD9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		239C506A253988E3008017CB /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				238BED7A2539E5370078AFD9 /* Color.swift */,
+				235312CB253ADD2F00D3F321 /* Constant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2309AA04253559ED00E1D0E2 /* UIView+Extensions.swift in Sources */,
+				235312CC253ADD2F00D3F321 /* Constant.swift in Sources */,
 				23D06A1A25345B8300845C6F /* ChallengeViewController.swift in Sources */,
 				2309AA0925355AE400E1D0E2 /* HabitCell.swift in Sources */,
 				A2A5537A25341FDD00219048 /* iCol.xcdatamodeld in Sources */,

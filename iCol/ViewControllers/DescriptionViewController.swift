@@ -10,6 +10,7 @@ import UIKit
 class DescriptionViewController: UIViewController {
 
     let descriptionLabel = UILabel()
+    var type: Type?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,6 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupNavigation() {
-//        navigationItem.title = "Eat Less Gorengan"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -58,8 +58,11 @@ class DescriptionViewController: UIViewController {
     
     @objc private func handlePlanning(_ button:UIButton) {
         let vc = PlanningViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let title = navigationItem.title {
+            vc.titleHabit = title
+            vc.type = self.type
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-
 }
