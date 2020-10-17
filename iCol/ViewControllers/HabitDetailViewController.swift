@@ -189,10 +189,11 @@ class HabitOverview: UIView {
         
         let totalYouEatLabel = UILabel()
         totalYouEatLabel.text = "Total you eat"
-        totalYouEatLabel.font = .preferredFont(forTextStyle: .body)
+        totalYouEatLabel.font = .preferredFont(forTextStyle: .title2)
+        totalYouEatLabel.font = .boldSystemFont(ofSize: 24)
         addSubview(totalYouEatLabel)
         
-        totalEat.font = .preferredFont(forTextStyle: .title1)
+        totalEat.font = .preferredFont(forTextStyle: .largeTitle)
         totalEat.font = .boldSystemFont(ofSize: 32)
         addSubview(totalEat)
         
