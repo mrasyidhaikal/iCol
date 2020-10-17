@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import CoreData
 class PlanningViewController: UIViewController {
     
     let goalSlider = UISlider()
@@ -21,7 +21,8 @@ class PlanningViewController: UIViewController {
     
     let startEndTextField = UITextField()
     let currentConsumptionTextfield = UITextField()
-    
+  
+    var plan = [Planning]()
     lazy var txtDatePicker:UITextField = {
         let txt = UITextField()
         txt.rightView = UIImageView(image: UIImage(systemName: "calendar"))
@@ -82,8 +83,37 @@ class PlanningViewController: UIViewController {
     
     private func setupNavigation() {
         navigationItem.title = "Let’s set a plan!"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.add,
+            target: self,
+            action: #selector(handleCreatePlan)
+        )
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    @objc func handleCreatePlan() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let startDate = txtDatePicker2.text
+        
+     
+        
+        let valuePerWeek = goalSlider.value
+        
+        let plan = Planning(context: context)
+        plan.title = "Belum"
+        plan.desc = "Belum"
+        plan.start_date = startDate
+        plan.value_week = Int16(valuePerWeek)
+        
+        do {
+            try context.save()
+            print("okee")
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+   
+    }
+
     
     private func setupConsumtion() {
     
@@ -216,6 +246,11 @@ class PlanningViewController: UIViewController {
         dateFormat.dateStyle = .long
         dateFormat.dateFormat = "E, dd MMM YYYY"
         self.txtDatePicker.text = dateFormat.string(from: sender.date)
+        
+        let dateFormat2 = DateFormatter()
+        dateFormat2.dateStyle = .long
+        dateFormat2.dateFormat = "dd/MM/yyyy  "
+        self.txtDatePicker2.text = dateFormat2.string(from: sender.date)
     }
     
     @objc func valuechangedDateEnd(sender: UIDatePicker) {
