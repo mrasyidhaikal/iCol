@@ -26,12 +26,11 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupBackground() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = Color.background
     }
     
     private func setupDescription() {
         descriptionLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna libero, fermentum eu nunc non, varius rutrum ex.  Donec non libero massa. Vestibulum vestibulum, mi vel aliquet placerat, odio risus vestibulum libero, ut ullamcorper sem neque id ligula."
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.numberOfLines = 0
         view.addSubview(descriptionLabel)
         
@@ -58,10 +57,10 @@ class DescriptionViewController: UIViewController {
     
     @objc private func handlePlanning(_ button:UIButton) {
         let vc = PlanningViewController()
-        if let title = navigationItem.title {
-            vc.titleHabit = title
-            vc.type = self.type
-        }
+        guard let title = navigationItem.title else { return }
+        vc.titleHabit = title
+        vc.type = self.type
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

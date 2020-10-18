@@ -46,7 +46,6 @@ class PlanningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
         
         setupNavigation()
         setupConsumtion()
@@ -55,6 +54,7 @@ class PlanningViewController: UIViewController {
     }
     
     private func setupNavigation() {
+        view.backgroundColor = Color.background
         navigationItem.title = "Let’s set a plan!"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Add", style: .done,
@@ -67,9 +67,11 @@ class PlanningViewController: UIViewController {
     @objc func handleCreatePlan() {
         
         if currentConsumptionTextfield.text == "" || startDateTextField.text == "" {
+            
             let alert = UIAlertController(title: "Warning", message: "Please enter all information", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             present(alert, animated: true)
+            
         } else {
             
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -93,11 +95,11 @@ class PlanningViewController: UIViewController {
     
     @objc func handleDataPicker(sender: UIDatePicker) {
         let dateFormat = DateFormatter()
-        dateFormat.dateStyle = .long
         dateFormat.dateFormat = "E, dd MMM YYYY"
         
         startDateTextField.text = dateFormat.string(from: sender.date)
         endDate = Calendar.current.date(byAdding: .day, value: 7, to: sender.date)
+        
     }
     
     @objc func handleSlider(_ sender: UISlider) {

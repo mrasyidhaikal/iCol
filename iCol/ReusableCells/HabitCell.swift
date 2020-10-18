@@ -55,7 +55,6 @@ class HabitCell: UITableViewCell {
         descImageLabel.image = UIImage(named: "food")
         descImageLabel.tintColor = .label
         descImageLabel.setConstraint(heighAnchorConstant: 15, widthAnchorConstant: 15)
-        descLabel.font = .preferredFont(forTextStyle: .body)
         
         let descLabelStackView = UIStackView(arrangedSubviews: [descImageLabel, descLabel])
         descLabelStackView.axis = .horizontal

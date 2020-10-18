@@ -24,7 +24,7 @@ class ProgressBarView: UIView {
         addSubview(progressBackground)
         addSubview(progressView)
 
-        progressView.backgroundColor = #colorLiteral(red: 0.176264137, green: 0.3899727762, blue: 0.334807694, alpha: 1)
+        progressView.backgroundColor = Color.background
         progressView.layer.cornerRadius = 8
         progressBackground.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
         progressBackground.layer.cornerRadius = 8
@@ -32,14 +32,14 @@ class ProgressBarView: UIView {
         progressBackground.setConstraint(topAnchor: topAnchor, topAnchorConstant: 0,
                                          bottomAnchor: bottomAnchor,
                                          leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
-                                         trailingAnchor: trailingAnchor, trailingAnchorConstant: 0)
-        progressBackground.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                                         trailingAnchor: trailingAnchor, trailingAnchorConstant: 0,
+                                         heighAnchorConstant: 30)
         progressBackground.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
         progressView.setConstraint(topAnchor: topAnchor, topAnchorConstant: 0,
                                    bottomAnchor: bottomAnchor,
-                                   leadingAnchor: leadingAnchor, leadingAnchorConstant: 0)
-        progressView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                                   leadingAnchor: leadingAnchor, leadingAnchorConstant: 0,
+                                   heighAnchorConstant: 30)
     }
     
     required init?(coder: NSCoder) {

@@ -33,7 +33,7 @@ class ChallengeViewController: UICollectionViewController {
     }
     
     private func setupCollection() {
-        collectionView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+        collectionView.backgroundColor = Color.background
         collectionView.register(ChallengeCell.self, forCellWithReuseIdentifier: ChallengeCell.reuseIdentifier)
     }
     
@@ -42,7 +42,7 @@ class ChallengeViewController: UICollectionViewController {
             NSCollectionLayoutSection? in
           
             let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6)))
-            item.contentInsets.bottom = 16
+            item.contentInsets.bottom = 8
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)), subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets.top = 20
