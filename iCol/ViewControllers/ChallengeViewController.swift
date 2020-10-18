@@ -9,12 +9,7 @@ import UIKit
 
 class ChallengeViewController: UICollectionViewController {
     
-    private let challenges = [
-        Challenge(name: "Eat Less Gorengan", image: "Fried", type: .decrease),
-        Challenge(name: "Eat More Vegetables", image: "Vegetable", type: .increase),
-        Challenge(name: "Eat Less Fast Food", image: "Burger", type: .decrease),
-        Challenge(name: "Drink Less Soda", image: "Soda", type: .decrease)
-    ]
+    private let challenges: [Challenge] = Challenges.challenges
     
     init() {
         super.init(collectionViewLayout: ChallengeViewController.createLayout())
@@ -55,8 +50,12 @@ class ChallengeViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DescriptionViewController()
-        vc.navigationItem.title = challenges[indexPath.row].name
-        vc.type = challenges[indexPath.row].type
+        let challenge = challenges[indexPath.row]
+        
+        vc.navigationItem.title = challenge.name
+        vc.challengeDescription = challenge.description
+        vc.type = challenge.type
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

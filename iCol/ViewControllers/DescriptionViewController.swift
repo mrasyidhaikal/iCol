@@ -10,6 +10,7 @@ import UIKit
 class DescriptionViewController: UIViewController {
 
     let descriptionLabel = UILabel()
+    var challengeDescription: String = ""
     var type: Type?
     
     override func viewDidLoad() {
@@ -30,7 +31,8 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupDescription() {
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna libero, fermentum eu nunc non, varius rutrum ex.  Donec non libero massa. Vestibulum vestibulum, mi vel aliquet placerat, odio risus vestibulum libero, ut ullamcorper sem neque id ligula."
+        descriptionLabel.text = challengeDescription
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.numberOfLines = 0
         view.addSubview(descriptionLabel)
         
