@@ -8,14 +8,12 @@
 import UIKit
 import CoreData
 
-
 class HabitViewController: UITableViewController, DismissDetailHabit {
     
     private var habits: [Habit] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         setupNavigation()
         setupTableView()
@@ -23,10 +21,11 @@ class HabitViewController: UITableViewController, DismissDetailHabit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         CoreDataService.shared.fetchFromCoreData { (result) in
             self.habits = result
+            self.tableView.reloadData()
         }
-        tableView.reloadData()
     }
 
     private func setupNavigation() {
@@ -51,8 +50,8 @@ class HabitViewController: UITableViewController, DismissDetailHabit {
         if isDismiss {
             CoreDataService.shared.fetchFromCoreData { (result) in
                 self.habits = result
+                self.tableView.reloadData()
             }
-            tableView.reloadData()
         }
     }
     

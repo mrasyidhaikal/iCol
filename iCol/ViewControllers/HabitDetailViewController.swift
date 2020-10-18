@@ -136,13 +136,10 @@ class HabitDetailViewController: UIViewController {
         stackView.axis = .horizontal
         view.addSubview(stackView)
         
-        let divider = UIView()
-        divider.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
-        view.addSubview(divider)
-        
-        challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
-                                        leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                                        trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        challengeOverview.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         updateLabel.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 64,
                                   leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0)
