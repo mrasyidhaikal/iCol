@@ -23,18 +23,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         habitViewController.tabBarItem = UITabBarItem(title: "Habit", image: UIImage(systemName: "rosette"), tag: 0)
         let habitNavViewController = UINavigationController(rootViewController: habitViewController)
         
-        let viewController2 = ViewController2()
-        viewController2.tabBarItem = UITabBarItem(title: "VC2", image: UIImage(systemName: "book"), tag: 1)
-        let navController2 = UINavigationController(rootViewController: viewController2)
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [habitNavViewController, navController2]
+//        let viewController2 = ViewController2()
+//        viewController2.tabBarItem = UITabBarItem(title: "VC2", image: UIImage(systemName: "book"), tag: 1)
+//        let navController2 = UINavigationController(rootViewController: viewController2)
+//
+//        let tabBarController = UITabBarController()
+//        tabBarController.viewControllers = [habitNavViewController, navController2]
         
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: HabitViewController())
-        window?.backgroundColor = .systemBackground
+        window?.rootViewController = habitNavViewController
         window?.tintColor = Color.primary
+        window?.overrideUserInterfaceStyle = .light
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

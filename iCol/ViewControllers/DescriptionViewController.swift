@@ -27,7 +27,7 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupBackground() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = Color.background
     }
     
     private func setupDescription() {
@@ -59,10 +59,10 @@ class DescriptionViewController: UIViewController {
     
     @objc private func handlePlanning(_ button:UIButton) {
         let vc = PlanningViewController()
-        if let title = navigationItem.title {
-            vc.titleHabit = title
-            vc.type = self.type
-        }
+        guard let title = navigationItem.title else { return }
+        vc.titleHabit = title
+        vc.type = self.type
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

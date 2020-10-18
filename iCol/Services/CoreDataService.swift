@@ -28,15 +28,15 @@ class CoreDataService {
     }
     
     func getTotalEat(id: UUID) -> Int {
-        let habit = getHabit(id: id)
         
+        let habit = getHabit(id: id)
         var totalEat = 0
         
         habit.days?.forEach({ (day) in
             let day = day as! SummaryDay
             totalEat += Int(day.totalEatPerDay)
         })
-        
+                
         return totalEat
     }
     

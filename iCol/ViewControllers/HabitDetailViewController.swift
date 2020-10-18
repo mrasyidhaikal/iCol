@@ -73,9 +73,6 @@ class HabitDetailViewController: UIViewController {
     @objc private func handleSave() {
         let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        
         let day = SummaryDay(context: moc)
         day.totalEatPerDay = Int32(totalEatPerDay)
         day.currentDate = Date()
@@ -83,34 +80,27 @@ class HabitDetailViewController: UIViewController {
         guard let id = habit?.id else { return }
         
         let habitToUpdate = CoreDataService.shared.getHabit(id: id)
-
+        let days = habitToUpdate.days
+        let sortedDays = days?.sorted(by: { ($0 as! SummaryDay).currentDate! > ($1 as! SummaryDay).currentDate! })
+        
         do {
             if habitToUpdate.days?.count == 0 {
-                print("masih baru")
+                print("Habit baru")
                 habitToUpdate.addToDays(day)
-            } else {
-                print(habitToUpdate.days?.count as Any)
-                
-                let days = habitToUpdate.days
-                let sortedDays = days?.sorted(by: { ($0 as! SummaryDay).currentDate! > ($1 as! SummaryDay).currentDate! })
-                
-                if sortedDays?.count == 1 {
-                    print("masih satu hari")
+            } else  {
+                guard let latestDate = ((sortedDays?[0]) as AnyObject).currentDate! else { return }
+                if Date() > Date().endDate(of: latestDate) {
+                    print("Hari baru")
+                    habitToUpdate.addToDays(day)
+                } else {
+                    print("Hari yang sama")
                     let dayToUpdate = sortedDays?[0] as! SummaryDay
                     dayToUpdate.totalEatPerDay += Int32(totalEatPerDay)
                     dayToUpdate.currentDate = Date()
-                } else if ((sortedDays?[0] as AnyObject).currentDate!) < Date() && Date() > ((sortedDays?[1] as AnyObject).currentDate!) {
-                    print("today")
-                    let dayToUpdate = sortedDays?[0] as! SummaryDay
-                    dayToUpdate.totalEatPerDay = Int32(totalEatPerDay)
-                    dayToUpdate.currentDate = Date()
-                } else {
-                    print("Not today")
-                    habitToUpdate.addToDays(day)
                 }
             }
-            try moc.save()
             
+            try moc.save()
             
         } catch let err {
             print(err.localizedDescription)
@@ -146,13 +136,10 @@ class HabitDetailViewController: UIViewController {
         stackView.axis = .horizontal
         view.addSubview(stackView)
         
-        let divider = UIView()
-        divider.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
-        view.addSubview(divider)
-        
-        challengeOverview.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
-                                        leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                                        trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        challengeOverview.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         updateLabel.setConstraint(topAnchor: challengeOverview.bottomAnchor, topAnchorConstant: 64,
                                   leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 0)
@@ -184,12 +171,7 @@ class HabitOverview: UIView {
         titleLabel.font = .preferredFont(forTextStyle: .title2)
         titleLabel.font = .boldSystemFont(ofSize: 24)
         addSubview(titleLabel)
-        
-        percentageLabel.font = .preferredFont(forTextStyle: .body)
-        
-        remainingDay.text = "4 days till challenge ends"
-        remainingDay.font = .preferredFont(forTextStyle: .body)
-        
+       
         let percentageStackView = UIStackView(arrangedSubviews: [percentageLabel, remainingDay])
         percentageStackView.axis = .horizontal
         percentageStackView.distribution = .equalCentering
@@ -199,7 +181,6 @@ class HabitOverview: UIView {
         
         let doneSymbol = UIView()
         doneSymbol.backgroundColor = Color.primary
-        doneSymbol.translatesAutoresizingMaskIntoConstraints = false
         doneSymbol.layer.cornerRadius = 6
         
         let doneLabel = UILabel()
@@ -213,7 +194,6 @@ class HabitOverview: UIView {
         
         let textSymbol = UIView()
         textSymbol.backgroundColor = #colorLiteral(red: 0.7685508132, green: 0.768681109, blue: 0.7685337067, alpha: 1)
-        textSymbol.translatesAutoresizingMaskIntoConstraints = false
         textSymbol.layer.cornerRadius = 6
         
         let textLabel = UILabel()
@@ -258,11 +238,11 @@ class HabitOverview: UIView {
             topAnchor: progressBar.bottomAnchor, topAnchorConstant: 16,
             trailingAnchor: textStackView.leadingAnchor, trailingAnchorConstant: -24)
         
-        doneSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        doneSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        doneSymbol.setConstraint(
+            heighAnchorConstant: 12, widthAnchorConstant: 12)
         
-        textSymbol.widthAnchor.constraint(equalToConstant: 12).isActive = true
-        textSymbol.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        textSymbol.setConstraint(
+            heighAnchorConstant: 12, widthAnchorConstant: 12)
         
         totalYouEatLabel.setConstraint(
             topAnchor: doneStackView.bottomAnchor, topAnchorConstant: 24,
