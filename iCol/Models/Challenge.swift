@@ -15,5 +15,6 @@ enum Type {
 struct Challenge {
     let name: String
     let image: String
+    let description: String
     let type: Type
 }
