@@ -7,7 +7,13 @@
 
 import Foundation
 
+enum Type {
+    case increase
+    case decrease
+}
+
 struct Challenge {
     let name: String
     let image: String
+    let type: Type
 }
