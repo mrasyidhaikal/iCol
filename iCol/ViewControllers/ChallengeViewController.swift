@@ -9,12 +9,7 @@ import UIKit
 
 class ChallengeViewController: UICollectionViewController {
     
-    private let challenges = [
-        Challenge(name: "Eat Less Gorengan", image: "Fried"),
-        Challenge(name: "Eat More Vegetables", image: "Vegetable"),
-        Challenge(name: "Eat Less Fast Food", image: "Burger"),
-        Challenge(name: "Drink Less Soda", image: "Soda")
-    ]
+    private let challenges: [Challenge] = Challenges.challenges
     
     init() {
         super.init(collectionViewLayout: ChallengeViewController.createLayout())
@@ -33,7 +28,7 @@ class ChallengeViewController: UICollectionViewController {
     }
     
     private func setupCollection() {
-        collectionView.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+        collectionView.backgroundColor = Color.background
         collectionView.register(ChallengeCell.self, forCellWithReuseIdentifier: ChallengeCell.reuseIdentifier)
     }
     
@@ -41,13 +36,13 @@ class ChallengeViewController: UICollectionViewController {
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) ->
             NSCollectionLayoutSection? in
           
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.55)))
-            item.contentInsets.bottom = 12
-            item.contentInsets.trailing = 16
+            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6)))
+            item.contentInsets.bottom = 8
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)), subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets.leading = 16
             section.contentInsets.top = 20
+            section.contentInsets.leading = 16
+            section.contentInsets.trailing = 16
             
             return section
         }
@@ -55,7 +50,13 @@ class ChallengeViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DescriptionViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let challenge = challenges[indexPath.row]
+        
+        vc.navigationItem.title = challenge.name
+        vc.challengeDescription = challenge.description
+        vc.type = challenge.type
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

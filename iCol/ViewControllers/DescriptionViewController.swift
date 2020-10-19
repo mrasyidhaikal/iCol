@@ -10,6 +10,8 @@ import UIKit
 class DescriptionViewController: UIViewController {
 
     let descriptionLabel = UILabel()
+    var challengeDescription: String = ""
+    var type: Type?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,45 +23,47 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        navigationItem.title = "Eat Less Gorengan"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupBackground() {
-        view.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
+        view.backgroundColor = Color.background
     }
     
     private func setupDescription() {
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna libero, fermentum eu nunc non, varius rutrum ex.  Donec non libero massa. Vestibulum vestibulum, mi vel aliquet placerat, odio risus vestibulum libero, ut ullamcorper sem neque id ligula."
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        descriptionLabel.text = challengeDescription
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.numberOfLines = 0
         view.addSubview(descriptionLabel)
         
-        descriptionLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+        descriptionLabel.setConstraint(topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 8,
                                        leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
                                        trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
     private func setupButton() {
         let takeBtn = UIButton(type: .system)
-        takeBtn.backgroundColor = #colorLiteral(red: 0.1764705882, green: 0.3882352941, blue: 0.337254902, alpha: 1)
+        takeBtn.backgroundColor = Color.primary
         takeBtn.setTitleColor(UIColor.white, for: .normal)
-        takeBtn.setTitle("Take The Challenge", for: .normal)
+        takeBtn.setTitle("Let's start", for: .normal)
         takeBtn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         takeBtn.layer.cornerRadius = 8
         view.addSubview(takeBtn)
         
         takeBtn.setConstraint(bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -16,
                               leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        takeBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
+                              heighAnchorConstant: 50)
         takeBtn.addTarget(self, action: #selector(handlePlanning(_:)), for: .touchUpInside)
     }
     
     @objc private func handlePlanning(_ button:UIButton) {
         let vc = PlanningViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        guard let title = navigationItem.title else { return }
+        vc.titleHabit = title
+        vc.type = self.type
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-
 }

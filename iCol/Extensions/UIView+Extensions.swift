@@ -15,7 +15,7 @@ extension UIView {
                        trailingAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>? = nil, trailingAnchorConstant: CGFloat = 0,
                        centerXAnchor: NSLayoutAnchor<NSLayoutXAxisAnchor>? = nil, centerXAnchorConstant: CGFloat = 0,
                        centerYAnchor: NSLayoutAnchor<NSLayoutYAxisAnchor>? = nil, centerYAnchorConstant: CGFloat = 0,
-                       heighAnchorConstant: CGFloat = 0, widthAnchorConstant: CGFloat = 0) {
+                       heighAnchorConstant: CGFloat? = nil, widthAnchorConstant: CGFloat? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let topAnchor = topAnchor {
@@ -42,9 +42,18 @@ extension UIView {
             self.centerYAnchor.constraint(equalTo: centerYAnchor, constant: centerYAnchorConstant).isActive = true
         }
         
+        if let height = heighAnchorConstant {
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        
+        if let width = widthAnchorConstant {
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
     }
     
     func addShadow(color: UIColor, opacity: Float, radius: CGFloat, offset: CGSize) {
+        self.clipsToBounds = false
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOpacity = opacity
         self.layer.shadowRadius = radius
