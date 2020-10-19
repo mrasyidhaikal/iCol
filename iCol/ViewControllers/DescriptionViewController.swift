@@ -45,7 +45,7 @@ class DescriptionViewController: UIViewController {
         let takeBtn = UIButton(type: .system)
         takeBtn.backgroundColor = Color.primary
         takeBtn.setTitleColor(UIColor.white, for: .normal)
-        takeBtn.setTitle("Take The Challenge", for: .normal)
+        takeBtn.setTitle("Let's start", for: .normal)
         takeBtn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         takeBtn.layer.cornerRadius = 8
         view.addSubview(takeBtn)

@@ -113,15 +113,30 @@ class PlanningViewController: UIViewController {
         if sender.text != "" {
             
             guard let valueDay = Int(valuePerDay) else { return }
-            let valuePerWeek = (Int(valueDay) * 7) - 2 * 7
             
-            if valuePerWeek <= -7 {
+            var valuePerWeek = 0
+            
+            if type == .increase {
+                 valuePerWeek = (Int(valueDay) * 7) + 2 * 7
+            } else {
+                 valuePerWeek = (Int(valueDay) * 7) - 2 * 7
+            }
+           
+            if valuePerWeek <= 0 {
                 goalSlider.maximumValue = 0
                 goalLabel.text = "\(0) piece(s)"
+                UIView.animate(withDuration: 0.5) {
+                    self.goalSlider.isEnabled = false
+                    self.goalSlider.alpha = 0.5
+                }
             } else {
                 goalSlider.maximumValue = Float(valuePerWeek)
                 goalSlider.setValue(Float(valuePerWeek), animated: true)
                 goalLabel.text = "\(valuePerWeek) piece(s)"
+                UIView.animate(withDuration: 0.5) {
+                    self.goalSlider.isEnabled = true
+                    self.goalSlider.alpha = 1
+                }
             }
             
         } else {
@@ -162,7 +177,11 @@ class PlanningViewController: UIViewController {
         goalText.text = "Set your weekly goal"
         goalText.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        reducePerWeekLabel.text = "Reduce: 2 piece(s) / day"
+        if type == .increase {
+            reducePerWeekLabel.text = "Increase: 2 piece(s) / day"
+        } else {
+            reducePerWeekLabel.text = "Reduce: 2 piece(s) / day"
+        }
         reducePerWeekLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
         goalSlider.tintColor = Color.primary
