@@ -49,7 +49,7 @@
 		268CAF74253C587600E74187 /* Challenges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenges.swift; sourceTree = "<group>"; };
 		26976DD3253566EE00B810BB /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
 		A23CFF762536AA7400D2602D /* PlanningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningViewController.swift; sourceTree = "<group>"; };
-		A2A5536C25341FDD00219048 /* iCol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCol.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A5536C25341FDD00219048 /* iKol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iKol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5536F25341FDD00219048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5537125341FDD00219048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A2A5537325341FDD00219048 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		A2A5536D25341FDD00219048 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A2A5536C25341FDD00219048 /* iCol.app */,
+				A2A5536C25341FDD00219048 /* iKol.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,9 +185,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A2A5536B25341FDD00219048 /* iCol */ = {
+		A2A5536B25341FDD00219048 /* iKol */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A2A5538325341FDE00219048 /* Build configuration list for PBXNativeTarget "iCol" */;
+			buildConfigurationList = A2A5538325341FDE00219048 /* Build configuration list for PBXNativeTarget "iKol" */;
 			buildPhases = (
 				A2A5536825341FDD00219048 /* Sources */,
 				A2A5536925341FDD00219048 /* Frameworks */,
@@ -197,9 +197,9 @@
 			);
 			dependencies = (
 			);
-			name = iCol;
+			name = iKol;
 			productName = iCol;
-			productReference = A2A5536C25341FDD00219048 /* iCol.app */;
+			productReference = A2A5536C25341FDD00219048 /* iKol.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -216,7 +216,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A2A5536725341FDD00219048 /* Build configuration list for PBXProject "iCol" */;
+			buildConfigurationList = A2A5536725341FDD00219048 /* Build configuration list for PBXProject "iKol" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -229,7 +229,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A2A5536B25341FDD00219048 /* iCol */,
+				A2A5536B25341FDD00219048 /* iKol */,
 			);
 		};
 /* End PBXProject section */
@@ -418,6 +418,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protagonist.iCol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -438,6 +439,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protagonist.iCol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -448,7 +450,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A2A5536725341FDD00219048 /* Build configuration list for PBXProject "iCol" */ = {
+		A2A5536725341FDD00219048 /* Build configuration list for PBXProject "iKol" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2A5538125341FDE00219048 /* Debug */,
@@ -457,7 +459,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A2A5538325341FDE00219048 /* Build configuration list for PBXNativeTarget "iCol" */ = {
+		A2A5538325341FDE00219048 /* Build configuration list for PBXNativeTarget "iKol" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2A5538425341FDE00219048 /* Debug */,
