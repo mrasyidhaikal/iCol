@@ -49,7 +49,7 @@ class ChallengeViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DescriptionViewController()
+        let vc = DescriptionViewController() 
         let challenge = challenges[indexPath.row]
         
         vc.navigationItem.title = challenge.name
